@@ -44,9 +44,9 @@ if (UNIX AND NOT APPLE)
 			"[ERROR] std.cppm not found."
 		)
 	endif()
-	set(MOD ${MOD} STD)
+	file(GLOB MOD ${MOD} ${STD})
 	message("[STATUS] std.cppm found.")
-
+	get_filename_component(STD_DIR ${STD_CPPM} DIRECTORY)
 
 endif()
 
@@ -66,3 +66,9 @@ FetchContent_MakeAvailable(sdl2-cppm)
 add_executable(${PROJECT_NAME} ${SRC})
 add_dependencies(${PROJECT_NAME} sdl2-cppm-static sdl2-cppm)
 target_link_libraries(${PROJECT_NAME} PRIVATE sdl2-cppm)
+target_sources(
+	${PROJECT_NAME} PRIVATE
+	FILE_SET modules TYPE CXX_MODULES
+	BASE_DIRS ${CMAKE_CURRENT_SOURCE_DIR} ${STD_DIR}
+	FILES ${MOD}
+)
