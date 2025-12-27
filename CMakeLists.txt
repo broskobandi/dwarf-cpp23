@@ -64,7 +64,10 @@ FetchContent_MakeAvailable(sdl2-cppm)
 
 # Add exe
 add_executable(${PROJECT_NAME} ${SRC})
-add_dependencies(${PROJECT_NAME} sdl2-cppm-static sdl2-cppm SDL2)
+if (WIN32)
+	add_dependencies(${PROJECT_NAME} sdl2-cppm-static sdl2-cppm SDL2)
+endif()
+add_dependencies(${PROJECT_NAME} sdl2-cppm-static sdl2-cppm)
 target_link_libraries(${PROJECT_NAME} PRIVATE sdl2-cppm)
 target_sources(
 	${PROJECT_NAME} PRIVATE
@@ -72,3 +75,12 @@ target_sources(
 	BASE_DIRS ${CMAKE_CURRENT_SOURCE_DIR} ${STD_DIR}
 	FILES ${MOD}
 )
+
+# Copy SDL library file to the target build dir
+if (WIN32)
+	add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+		COMMAND ${CMAKE_COMMAND} -E copy
+		$<TARGET_FILE:SDL2>
+		$<TARGET_FILE_DIR:${PROJECT_NAME}>
+	)
+endif()
