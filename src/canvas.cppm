@@ -1,5 +1,3 @@
-module;
-
 export module canvas;
 
 import sdl2;

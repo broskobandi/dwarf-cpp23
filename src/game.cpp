@@ -1,7 +1,8 @@
 module game;
 
-import canvas;
 import sdl2;
+import canvas;
+import tiles;
 
 import std;
 
@@ -25,7 +26,13 @@ void Game::run() {
 
 	Canvas canvas(win);
 
-	auto tex_id = canvas.create_texture("../assets/face.bmp");
+	Tiles tiles(
+		canvas.create_texture("../assets/ground3.bmp"),
+		128,
+		600 / (128 / 4),
+		800 / 128,
+		128 / 4
+	);
 
 	while (is_running) {
 		while (event.poll()) {
@@ -41,11 +48,7 @@ void Game::run() {
 		}
 		canvas.clear({30, 70, 70, 255});
 
-		canvas.draw(
-			Canvas::RenderData{
-				tex_id
-			}
-		);
+		canvas.draw(tiles.render_data());
 
 		canvas.present();
 	}
