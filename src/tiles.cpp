@@ -26,33 +26,37 @@ Tiles::Tiles(
 	uint32_t layers,
 	int32_t z_offset
 ) :
-	normal_tex_id(normal_tex_id), shadow_tex_id(shadow_tex_id)
+	normal_tex_id(normal_tex_id),
+	shadow_tex_id(shadow_tex_id),
+	hitbox_size(hitbox_size),
+	num_tiles_per_layer(rows * cols)
 {
+	num_tiles_per_layer = rows * cols;
 	size_t index = 0;
 	for (uint32_t z = 0; z < layers; z++) {
 		for (uint32_t y = 0; y < rows; y++) {
 			for (uint32_t x = 0; x < cols; x++) {
 				int32_t x_offset = y % 2 == 0 ? 0 : tile_size / 2;
-				Rect tile {
+				Rect dstrect {
 					static_cast<int32_t>(x * tile_size + x_offset),
 					static_cast<int32_t>(y * y_offset - z * z_offset),
 					tile_size,
 					tile_size
 				};
 				Rect hitbox {
-					static_cast<int32_t>(tile.x + ((tile.w - hitbox_size) / 2)),
-					static_cast<int32_t>(tile.y + ((tile.h - hitbox_size) / 2)),
+					static_cast<int32_t>(dstrect.x + ((dstrect.w - hitbox_size) / 2)),
+					static_cast<int32_t>(dstrect.y + ((dstrect.h - hitbox_size) / 2)),
 					hitbox_size,
 					hitbox_size
 				};
 				bool is_exposed = false;
-				if (
-					z == layers - 1 || x == 0 || x == cols - 1 || y == 0 || y == rows - 1
-				) {
-					is_exposed = true;
-				}
+				// if (
+				// 	z == layers - 1 || x == 0 || x == cols - 1 || y == 0 || y == rows - 1
+				// ) {
+				// 	is_exposed = true;
+				// }
 				tile_info.push_back({hitbox, is_exposed});
-				rd.push_back({normal_tex_id, tile});
+				rd.push_back({normal_tex_id, dstrect});
 				index++;
 			}
 		}
@@ -67,6 +71,13 @@ void Tiles::update(Point mouse_pos, bool left_click) {
 	size_t index = 0;
 	optional<Point> tile_underneath {nullopt};
 	for (auto& tile : tile_info) {
+		tile.is_exposed = false;
+		if (
+			index + num_tiles_per_layer >= rd.size() || 
+			!tile_info.at(index + num_tiles_per_layer).is_active
+		) {
+			tile.is_exposed = true;
+		}
 		if (tile.is_active) {
 			rd.at(index).alpha_mod = 255;
 		}

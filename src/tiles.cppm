@@ -18,7 +18,7 @@ private:
 
 	struct TileInfo {
 		Rect hitbox;
-		bool is_exposed;
+		bool is_exposed {false};
 		bool is_active {true};
 	};
 
@@ -26,6 +26,8 @@ private:
 	vector<TileInfo> tile_info;
 	size_t normal_tex_id;
 	size_t shadow_tex_id;
+	uint32_t num_tiles_per_layer;
+	uint32_t hitbox_size;
 public:
 	Tiles(
 		size_t normal_tex_id,
