@@ -14,8 +14,15 @@ using sdl2::Rect;
 
 export class Tiles {
 private:
+
+	struct TileInfo {
+		Rect hitbox;
+		bool is_exposed;
+		bool is_active {true};
+	};
+
 	vector<Canvas::RenderData> rd;
-	vector<Rect> hitboxes;
+	vector<TileInfo> tile_info;
 public:
 	Tiles(
 		size_t tex_id,
@@ -23,7 +30,9 @@ public:
 		uint32_t hitbox_size,
 		uint32_t rows,
 		uint32_t cols,
-		int32_t y_offset
+		int32_t y_offset,
+		uint32_t layers = 1,
+		int32_t z_offset = 0
 	);
 	const vector<Canvas::RenderData>& render_data() const;
 	void update(const Event::Mouse& mouse);

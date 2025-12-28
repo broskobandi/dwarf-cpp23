@@ -28,7 +28,6 @@ public:
 		float angle {0.0f};
 		optional<Point> center;
 		Renderer::Flip flip {Renderer::Flip::NONE};
-		bool should_render {true};
 		uint8_t alpha_mod {255};
 		optional<Color> color_mod {nullopt};
 	};

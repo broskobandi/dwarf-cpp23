@@ -32,6 +32,8 @@ void Game::run() {
 		128 / 2,
 		600 / (128 / 4),
 		800 / 128,
+		128 / 4,
+		2,
 		128 / 4
 	);
 
@@ -53,7 +55,7 @@ void Game::run() {
 		canvas.clear({30, 70, 70, 255});
 
 		canvas.draw(tiles.render_data());
-		canvas.draw(tiles.hitboxes_render_data());
+		// canvas.draw(tiles.hitboxes_render_data());
 
 		canvas.present();
 	}

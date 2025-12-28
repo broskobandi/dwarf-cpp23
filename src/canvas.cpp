@@ -32,7 +32,6 @@ void Canvas::present() const {
 }
 
 void Canvas::draw(const RenderData& rd) const {
-	if (!rd.should_render) return;
 	if (holds_alternative<size_t>(rd.col_or_tex_id)) {
 		auto tex_id = std::get<size_t>(rd.col_or_tex_id);
 		if (tex_id >= textures.size()) {
@@ -41,7 +40,7 @@ void Canvas::draw(const RenderData& rd) const {
 			if (rd.color_mod.has_value()) {
 				ren.set_color_mode(textures.at(tex_id), rd.color_mod.value());
 			}
-			// ren.set
+			ren.set_alpha_mode(textures.at(tex_id), rd.alpha_mod);
 			ren.copy(
 				textures.at(tex_id),
 				rd.dstrect,
