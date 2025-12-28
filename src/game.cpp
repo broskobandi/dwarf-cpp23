@@ -28,6 +28,7 @@ void Game::run() {
 
 	Tiles tiles(
 		canvas.create_texture("../assets/ground3.bmp"),
+		canvas.create_texture("../assets/ground3-shadow.bmp"),
 		128,
 		128 / 2,
 		600 / (128 / 4),
@@ -38,6 +39,7 @@ void Game::run() {
 	);
 
 	while (is_running) {
+		bool left_click = false;
 		while (event.poll()) {
 			if (
 				event.type() == Event::Type::QUIT ||
@@ -48,9 +50,15 @@ void Game::run() {
 			) {
 				is_running = false;
 			}
+			if (
+				event.type() == Event::Type::MOUSEBUTTONDOWN &&
+				event.mouse().left
+			) {
+				left_click = true;
+			}
 		}
 
-		tiles.update(event.mouse());
+		tiles.update({event.mouse().x, event.mouse().y}, left_click);
 
 		canvas.clear({30, 70, 70, 255});
 
