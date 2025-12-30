@@ -3,7 +3,6 @@ module tiles;
 import std;
 import sdl2;
 
-using std::vector;
 using std::uint32_t;
 using std::int32_t;
 using std::size_t;
@@ -19,7 +18,9 @@ Tiles::Tiles(Tiles::InitData id, const Renderer& ren, path bmp) :
 	dstrect_size(id.dstrect_size),
 	srcrect_size(id.srcrect_size),
 	rows(id.rows),
-	cols(id.cols)
+	cols(id.cols),
+	y_offset(id.y_offset),
+	z_offset(id.z_offset)
 {
 	num_tiles_per_layer = rows * cols;
 	size_t index = 0;
@@ -143,7 +144,7 @@ void Tiles::draw(const Renderer& ren) {
 		ren.set_alpha_mode(texture, tile.alpha_mod);
 		ren.copy(texture, tile.dstrect, tile.srcrect);
 
-		// Render shading
+		// Render shadows
 		size_t cur_row = index / cols;
 		size_t stagger_adjustment = cur_row % 2 == 0 ? 0 : 1;
 		size_t index_of_shadow_casting_tile =
@@ -152,11 +153,34 @@ void Tiles::draw(const Renderer& ren) {
 			tile.is_exposed &&
 			tile.is_active &&
 			index_of_shadow_casting_tile < tiles.size() &&
-			tiles.at(index_of_shadow_casting_tile).is_active
+			tiles.at(index_of_shadow_casting_tile).is_active &&
+			tiles.at(index_of_shadow_casting_tile).dstrect.y == tile.dstrect.y - y_offset - z_offset
 		) {
 			tile.srcrect.x = srcrect_size.w * 5;
 			ren.copy(texture, tile.dstrect, tile.srcrect);
 		}
+
+		// size_t index_of_tile_to_right = index + 1;
+		// if (
+		// 	tile.is_active &&
+		// 	index_of_tile_to_right < tiles.size() &&
+		// 	tiles.at(index_of_tile_to_right).is_active &&
+		// 	tiles.at(index_of_tile_to_right).dstrect.y == tile.dstrect.y
+		// ) {
+		// 	tile.srcrect.x = srcrect_size.w * 1;
+		// 	ren.copy(texture, tile.dstrect, tile.srcrect);
+		// }
+		//
+		// size_t index_of_tile_to_left = index - 1;
+		// if (
+		// 	tile.is_active &&
+		// 	(
+		// 		index_of_tile_to_left < 0
+		// 	)
+		// ) {
+		// 	tile.srcrect.x = srcrect_size.w * 4;
+		// 	ren.copy(texture, tile.dstrect, tile.srcrect);
+		// }
 
 		index++;
 	}

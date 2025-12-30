@@ -61,6 +61,8 @@ private:
 	Dimensions srcrect_size;
 	uint32_t rows;
 	uint32_t cols;
+	int32_t y_offset;
+	int32_t z_offset;
 public:
 	Tiles(InitData init_data, const Renderer& ren, path bmp);
 	void update(Point mouse_pos, bool left_click);
