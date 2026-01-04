@@ -105,6 +105,9 @@ void Tiles::update(Point mouse_pos, bool left_click) {
 			(tile.is_staggered ? 1 : 0);
 		size_t tile_above_index =
 			i + num_tiles_per_layer;
+		size_t tile_above_up_right_index =
+			i + num_tiles_per_layer - num_cols -
+			(tile.is_staggered ? 1 : 0);
 
 		// Update blocking bools
 
@@ -171,6 +174,16 @@ void Tiles::update(Point mouse_pos, bool left_click) {
 			tile.is_active = false;
 		}
 
+		// Update lighting
+
+		if (tile_above_up_right_index < tiles.size() &&
+			tiles.at(tile_above_up_right_index).is_active
+		) {
+			tile.is_in_shadow = true;
+		} else {
+			tile.is_in_shadow = false;
+		}
+
 		i++;
 	}
 }
@@ -180,6 +193,7 @@ void Tiles::draw(const Renderer& ren) const {
 	static uint8_t new_alpha {255};
 	for (const auto& tile : tiles) {
 
+		// Render base rect
 		if (tile.is_highlighted) {
 			new_alpha = 128;
 		} else {
@@ -192,6 +206,14 @@ void Tiles::draw(const Renderer& ren) const {
 		if (tile.is_active && tile.is_visible) {
 			ren.copy(tex, tile.dstrect, tile.srcrect);
 		}
+
+		// Render shadows
+		if (tile.is_in_shadow) {
+			Rect srcrect = tile.srcrect;
+			srcrect.x = srcrect.w * 5;
+			ren.copy(tex, tile.dstrect, srcrect);
+		}
+
 	}
 	// ren.set_draw_color({100, 100, 200, 100});
 	// for (const auto& tile : tiles) {
