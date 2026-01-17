@@ -1,75 +1,36 @@
-cmake_minimum_required(FATAL_ERROR VERSION 3.30)
+cmake_minimum_required(VERSION 3.30)
+
+if (WIN)
+	set(CMAKE_CXX_COMPILER x86_64-w64-mingw32-clang++)
+	set(SDL_DIR ${CMAKE_CURRENT_SOURCE_DIR}/SDL2-2.32.8/x86_64-w64-mingw32)
+else()
+	set(CMAKE_CXX_COMPILER clang++)
+endif()
+message("COMPILER = ${CMAKE_CXX_COMPILER}")
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
-set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
-file(GLOB MOD ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cppm)
-file(GLOB SRC ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -stdlib=libc++")
+set(STD_DIR /usr/lib/llvm/21/share/libc++/v1)
+file(GLOB SRC src/*.cpp)
+file(GLOB MOD src/*.cppm ${STD_DIR}/std.cppm)
 
-if (UNIX AND NOT APPLE)
-	# Use libc++
-	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -stdlib=libc++")
+project(dwarf CXX)
 
-	# Ensure clang is being used
-	if (NOT CMAKE_CXX_COMPILER)
-		message(FATAL_ERROR "[ERROR] Please specify the c++ compiler.")
-	endif()
-	get_filename_component(COMPILER_NAME ${CMAKE_CXX_COMPILER} NAME)
-	if (NOT COMPILER_NAME STREQUAL clang++)
-		message(FATAL_ERROR
-			"[ERROR] Must use clang++ as the project uses c++23 modules."
-		)
-	endif()
-
-	# Ensure Ninja is being used
-	if (NOT CMAKE_GENERATOR STREQUAL Ninja)
-		message(FATAL_ERROR
-			"[ERROR] Must use Ninja as the project uses c++23 modules."
-		)
-	endif()
-
-endif()
-
-project(dwarf CXX C)
-
-# Get sdl2-cppm
-include(FetchContent)
-FetchContent_Declare(
-	sdl2-cppm
-	GIT_REPOSITORY https://github.com/broskobandi/sdl2-cppm.git
-	GIT_SHALLOW TRUE
-	GIT_TAG main
-)
-FetchContent_MakeAvailable(sdl2-cppm)
-
-# Add exe
 add_executable(${PROJECT_NAME} ${SRC})
-if (WIN32)
-	add_dependencies(${PROJECT_NAME} sdl2-cppm-static sdl2-cppm SDL2)
-endif()
-add_dependencies(${PROJECT_NAME} sdl2-cppm-static sdl2-cppm)
-target_link_libraries(${PROJECT_NAME} PRIVATE sdl2-cppm)
-target_sources(
-	${PROJECT_NAME} PRIVATE
-	FILE_SET modules TYPE CXX_MODULES
-	FILES ${MOD}
-)
-
-# Add compile options
-if (UNIX AND NOT APPLE)
-	if (CMAKE_BUILD_TYPE STREQUAL Debug)
-		target_compile_options(
-			${PROJECT_NAME} PRIVATE
-			-Wall -Wextra -Wunused-result -Wconversion
-		)
-	endif()
-endif()
-
-# Copy SDL library file to the target build dir
-if (WIN32)
-	add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
-		COMMAND ${CMAKE_COMMAND} -E copy
-		$<TARGET_FILE:SDL2>
-		$<TARGET_FILE_DIR:${PROJECT_NAME}>
+if (WIN)
+	target_link_directories(${PROJECT_NAME} PRIVATE ${SDL_DIR}/lib)
+	target_include_directories(${PROJECT_NAME} PRIVATE ${SDL_DIR}/include)
+	add_custom_command(
+		TARGET ${PROJECT_NAME} POST_BUILD
+		COMMAND ${CMAKE_COMMAND} -E copy_directory
+		${CMAKE_CURRENT_SOURCE_DIR}/libs
+		${CMAKE_CURRENT_BINARY_DIR}
 	)
 endif()
+target_link_libraries(${PROJECT_NAME} PRIVATE SDL2)
+target_compile_options(${PROJECT_NAME} PRIVATE -Wall -Wextra -Wunused-result -Wconversion)
+target_sources(${PROJECT_NAME} PRIVATE FILE_SET modules TYPE CXX_MODULES
+	BASE_DIRS ${STD_DIR} ${CMAKE_CURRENT_SOURCE_DIR}
+	FILES ${MOD}
+)
