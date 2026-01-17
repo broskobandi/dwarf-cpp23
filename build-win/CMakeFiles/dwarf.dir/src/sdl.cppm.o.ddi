@@ -1,0 +1,21 @@
+{
+  "revision": 0,
+  "rules": [
+    {
+      "primary-output": "CMakeFiles/dwarf.dir/src/sdl.cppm.o",
+      "provides": [
+        {
+          "is-interface": true,
+          "logical-name": "sdl",
+          "source-path": "/home/broskobandi/Projects/dwarf-cpp23/src/sdl.cppm"
+        }
+      ],
+      "requires": [
+        {
+          "logical-name": "std"
+        }
+      ]
+    }
+  ],
+  "version": 1
+}

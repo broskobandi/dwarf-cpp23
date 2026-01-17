@@ -2,25 +2,64 @@ export module game;
 
 import std;
 import sdl;
+import ground;
+export import init;
 
-export struct GameInitData {
-	std::string title;
-	int win_w;
-	int win_h;
-	bool vsync;
-	std::uint8_t bg_r, bg_g, bg_b;
-};
+namespace game {
 
-export class Game : GameInitData {
+using std::vector;
 
+export class Game {
+private:
+	Sdl sdl;
+	Ground ground;
+	void render_content() const {
+		auto blocks = ground.get_blocks();
+		for (const auto& row : blocks) {
+			for (const auto& col : row) {
+				for (const auto& block : col) {
+					if (!block.active) continue;
+					sdl.copy_f(
+						block.tex_id,
+						block.srcrect,
+						block.dstrect
+					);
+				}
+			}
+		}
+	}
 public:
-	Game(GameInitData init_data) :
-		GameInitData(init_data)
+	Game(
+		GameInitData&& game_init_data,
+		BlocksInitData&& blocks_init_data
+	) :
+		sdl(
+			game_init_data.title,
+			game_init_data.win_w,
+			game_init_data.win_h,
+			game_init_data.vsync,
+			game_init_data.bg_r,
+			game_init_data.bg_g,
+			game_init_data.bg_b
+		),
+		ground(
+			blocks_init_data,
+			sdl.texture(blocks_init_data.path_to_bmp)
+		)
 	{}
+	Game(const Game&) = delete;
+	Game(Game&&) = delete;
+	Game& operator=(const Game&) = delete;
+	Game& operator=(Game&&) = delete;
 	void run() {
-		Sdl sdl(title, win_w, win_h, vsync, {bg_r, bg_g, bg_b, 255});
+		static bool game_run {false};
+
+		if (game_run)
+			throw std::runtime_error("Game cannot be run twice.");
 
 		bool running {true};
+
+		dbg("Entering main loop...");
 
 		while (running) {
 			while (sdl.poll_events()) {
@@ -32,8 +71,17 @@ public:
 				}
 			}
 			sdl.clear();
+
+			render_content();
+
 			sdl.present();
 		}
 
+		dbg("Loop finished.");
+
+		game_run = true;
 	}
+	~Game() = default;
 };
+
+}

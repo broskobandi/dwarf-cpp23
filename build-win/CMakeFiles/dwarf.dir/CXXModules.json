@@ -1,0 +1,82 @@
+{
+	"modules" : 
+	{
+		"game" : 
+		{
+			"bmi" : "/home/broskobandi/Projects/dwarf-cpp23/build-win/CMakeFiles/dwarf.dir/game.pcm",
+			"is-private" : true
+		},
+		"ground" : 
+		{
+			"bmi" : "/home/broskobandi/Projects/dwarf-cpp23/build-win/CMakeFiles/dwarf.dir/ground.pcm",
+			"is-private" : true
+		},
+		"init" : 
+		{
+			"bmi" : "/home/broskobandi/Projects/dwarf-cpp23/build-win/CMakeFiles/dwarf.dir/init.pcm",
+			"is-private" : true
+		},
+		"sdl" : 
+		{
+			"bmi" : "/home/broskobandi/Projects/dwarf-cpp23/build-win/CMakeFiles/dwarf.dir/sdl.pcm",
+			"is-private" : true
+		},
+		"std" : 
+		{
+			"bmi" : "/home/broskobandi/Projects/dwarf-cpp23/build-win/CMakeFiles/dwarf.dir/std.pcm",
+			"is-private" : true
+		}
+	},
+	"references" : 
+	{
+		"game" : 
+		{
+			"lookup-method" : "by-name",
+			"path" : "CMakeFiles/dwarf.dir/game.pcm"
+		},
+		"ground" : 
+		{
+			"lookup-method" : "by-name",
+			"path" : "CMakeFiles/dwarf.dir/ground.pcm"
+		},
+		"init" : 
+		{
+			"lookup-method" : "by-name",
+			"path" : "CMakeFiles/dwarf.dir/init.pcm"
+		},
+		"sdl" : 
+		{
+			"lookup-method" : "by-name",
+			"path" : "CMakeFiles/dwarf.dir/sdl.pcm"
+		},
+		"std" : 
+		{
+			"lookup-method" : "by-name",
+			"path" : "CMakeFiles/dwarf.dir/std.pcm"
+		}
+	},
+	"usages" : 
+	{
+		"game" : 
+		[
+			"ground",
+			"init",
+			"sdl",
+			"std"
+		],
+		"ground" : 
+		[
+			"init",
+			"sdl",
+			"std"
+		],
+		"init" : 
+		[
+			"std"
+		],
+		"sdl" : 
+		[
+			"std"
+		]
+	}
+}

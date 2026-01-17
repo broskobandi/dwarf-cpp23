@@ -1,0 +1,7 @@
+{
+	"InstallScripts" : 
+	[
+		"/home/broskobandi/Projects/dwarf-cpp23/build-win/cmake_install.cmake"
+	],
+	"Parallel" : false
+}

@@ -1,0 +1,30 @@
+{
+  "revision": 0,
+  "rules": [
+    {
+      "primary-output": "CMakeFiles/dwarf.dir/src/game.cppm.o",
+      "provides": [
+        {
+          "is-interface": true,
+          "logical-name": "game",
+          "source-path": "/home/broskobandi/Projects/dwarf-cpp23/src/game.cppm"
+        }
+      ],
+      "requires": [
+        {
+          "logical-name": "std"
+        },
+        {
+          "logical-name": "sdl"
+        },
+        {
+          "logical-name": "ground"
+        },
+        {
+          "logical-name": "init"
+        }
+      ]
+    }
+  ],
+  "version": 1
+}

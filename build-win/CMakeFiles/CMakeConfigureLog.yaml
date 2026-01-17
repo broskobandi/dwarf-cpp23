@@ -1,0 +1,1005 @@
+
+---
+events:
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/usr/share/cmake-4.1/Modules/CMakeDetermineSystem.cmake:12 (find_program)"
+      - "CMakeLists.txt:18 (project)"
+    mode: "program"
+    variable: "CMAKE_UNAME"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "uname"
+    candidate_directories:
+      - "/usr/local/sbin/"
+      - "/usr/local/bin/"
+      - "/usr/bin/"
+      - "/usr/sbin/"
+      - "/sbin/"
+      - "/bin/"
+    searched_directories:
+      - "/usr/local/sbin/uname"
+      - "/usr/local/bin/uname"
+    found: "/usr/bin/uname"
+    search_context:
+      ENV{PATH}:
+        - "/usr/local/sbin"
+        - "/usr/local/bin"
+        - "/usr/bin"
+        - "/usr/sbin"
+        - "/sbin"
+        - "/bin"
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/usr/share/cmake-4.1/Modules/CMakeDetermineSystem.cmake:212 (message)"
+      - "CMakeLists.txt:18 (project)"
+    message: |
+      The system is: Linux - 6.12.65_1 - x86_64
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/usr/share/cmake-4.1/Modules/CMakeNinjaFindMake.cmake:5 (find_program)"
+      - "CMakeLists.txt:18 (project)"
+    mode: "program"
+    variable: "CMAKE_MAKE_PROGRAM"
+    description: "Program used to build from build.ninja files."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "ninja-build"
+      - "ninja"
+      - "samu"
+    candidate_directories:
+      - "/usr/local/sbin/"
+      - "/usr/local/bin/"
+      - "/usr/bin/"
+      - "/usr/sbin/"
+      - "/sbin/"
+      - "/bin/"
+    searched_directories:
+      - "/usr/local/sbin/ninja-build"
+      - "/usr/local/sbin/ninja"
+      - "/usr/local/sbin/samu"
+      - "/usr/local/bin/ninja-build"
+      - "/usr/local/bin/ninja"
+      - "/usr/local/bin/samu"
+      - "/usr/bin/ninja-build"
+    found: "/usr/bin/ninja"
+    search_context:
+      ENV{PATH}:
+        - "/usr/local/sbin"
+        - "/usr/local/bin"
+        - "/usr/bin"
+        - "/usr/sbin"
+        - "/sbin"
+        - "/bin"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/usr/share/cmake-4.1/Modules/CMakeDetermineCompiler.cmake:115 (find_program)"
+      - "/usr/share/cmake-4.1/Modules/CMakeDetermineCXXCompiler.cmake:71 (_cmake_find_compiler_path)"
+      - "CMakeLists.txt:18 (project)"
+    mode: "program"
+    variable: "CMAKE_CXX_COMPILER_WITH_PATH"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "x86_64-w64-mingw32-clang++"
+    candidate_directories:
+      - "/usr/local/sbin/"
+      - "/usr/local/bin/"
+      - "/usr/bin/"
+      - "/usr/sbin/"
+      - "/sbin/"
+      - "/bin/"
+    searched_directories:
+      - "/usr/local/sbin/x86_64-w64-mingw32-clang++"
+      - "/usr/local/bin/x86_64-w64-mingw32-clang++"
+    found: "/usr/bin/x86_64-w64-mingw32-clang++"
+    search_context:
+      ENV{PATH}:
+        - "/usr/local/sbin"
+        - "/usr/local/bin"
+        - "/usr/bin"
+        - "/usr/sbin"
+        - "/sbin"
+        - "/bin"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/usr/share/cmake-4.1/Modules/CMakeDetermineCompilerId.cmake:462 (find_file)"
+      - "/usr/share/cmake-4.1/Modules/CMakeDetermineCompilerId.cmake:500 (CMAKE_DETERMINE_COMPILER_ID_WRITE)"
+      - "/usr/share/cmake-4.1/Modules/CMakeDetermineCompilerId.cmake:8 (CMAKE_DETERMINE_COMPILER_ID_BUILD)"
+      - "/usr/share/cmake-4.1/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "/usr/share/cmake-4.1/Modules/CMakeDetermineCXXCompiler.cmake:125 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:18 (project)"
+    mode: "file"
+    variable: "src_in"
+    description: "Path to a file."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "CMakeCXXCompilerId.cpp.in"
+    candidate_directories:
+      - "/usr/share/cmake-4.1/Modules/"
+    found: "/usr/share/cmake-4.1/Modules/CMakeCXXCompilerId.cpp.in"
+    search_context:
+      ENV{PATH}:
+        - "/usr/local/sbin"
+        - "/usr/local/bin"
+        - "/usr/bin"
+        - "/usr/sbin"
+        - "/sbin"
+        - "/bin"
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/usr/share/cmake-4.1/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
+      - "/usr/share/cmake-4.1/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "/usr/share/cmake-4.1/Modules/CMakeDetermineCXXCompiler.cmake:125 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:18 (project)"
+    message: |
+      Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
+      Compiler: /usr/bin/x86_64-w64-mingw32-clang++ 
+      Build flags: -stdlib=libc++
+      Id flags:  
+      
+      The output was:
+      0
+      
+      
+      Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "a.exe"
+      
+      The CXX compiler identification is Clang, found in:
+        /home/broskobandi/Projects/dwarf-cpp23/build-win/CMakeFiles/4.1.2/CompilerIdCXX/a.exe
+      
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/usr/share/cmake-4.1/Modules/CMakeFindBinUtils.cmake:238 (find_program)"
+      - "/usr/share/cmake-4.1/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
+      - "CMakeLists.txt:18 (project)"
+    mode: "program"
+    variable: "CMAKE_AR"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "x86_64-w64-mingw32-llvm-ar"
+      - "llvm-ar"
+      - "x86_64-w64-mingw32-ar"
+      - "ar"
+    candidate_directories:
+      - "/usr/bin/"
+      - "/usr/local/sbin/"
+      - "/usr/local/bin/"
+      - "/usr/sbin/"
+      - "/sbin/"
+      - "/bin/"
+    searched_directories:
+      - "/usr/bin/x86_64-w64-mingw32-llvm-ar"
+      - "/usr/local/sbin/x86_64-w64-mingw32-llvm-ar"
+      - "/usr/local/bin/x86_64-w64-mingw32-llvm-ar"
+      - "/usr/sbin/x86_64-w64-mingw32-llvm-ar"
+      - "/sbin/x86_64-w64-mingw32-llvm-ar"
+      - "/bin/x86_64-w64-mingw32-llvm-ar"
+      - "/usr/bin/llvm-ar"
+      - "/usr/local/sbin/llvm-ar"
+      - "/usr/local/bin/llvm-ar"
+      - "/usr/sbin/llvm-ar"
+      - "/sbin/llvm-ar"
+      - "/bin/llvm-ar"
+    found: "/usr/bin/x86_64-w64-mingw32-ar"
+    search_context:
+      ENV{PATH}:
+        - "/usr/local/sbin"
+        - "/usr/local/bin"
+        - "/usr/bin"
+        - "/usr/sbin"
+        - "/sbin"
+        - "/bin"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/usr/share/cmake-4.1/Modules/CMakeFindBinUtils.cmake:238 (find_program)"
+      - "/usr/share/cmake-4.1/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
+      - "CMakeLists.txt:18 (project)"
+    mode: "program"
+    variable: "CMAKE_RANLIB"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "x86_64-w64-mingw32-llvm-ranlib"
+      - "llvm-ranlib"
+      - "x86_64-w64-mingw32-ranlib"
+      - "ranlib"
+    candidate_directories:
+      - "/usr/bin/"
+      - "/usr/local/sbin/"
+      - "/usr/local/bin/"
+      - "/usr/sbin/"
+      - "/sbin/"
+      - "/bin/"
+    searched_directories:
+      - "/usr/bin/x86_64-w64-mingw32-llvm-ranlib"
+      - "/usr/local/sbin/x86_64-w64-mingw32-llvm-ranlib"
+      - "/usr/local/bin/x86_64-w64-mingw32-llvm-ranlib"
+      - "/usr/sbin/x86_64-w64-mingw32-llvm-ranlib"
+      - "/sbin/x86_64-w64-mingw32-llvm-ranlib"
+      - "/bin/x86_64-w64-mingw32-llvm-ranlib"
+      - "/usr/bin/llvm-ranlib"
+      - "/usr/local/sbin/llvm-ranlib"
+      - "/usr/local/bin/llvm-ranlib"
+      - "/usr/sbin/llvm-ranlib"
+      - "/sbin/llvm-ranlib"
+      - "/bin/llvm-ranlib"
+    found: "/usr/bin/x86_64-w64-mingw32-ranlib"
+    search_context:
+      ENV{PATH}:
+        - "/usr/local/sbin"
+        - "/usr/local/bin"
+        - "/usr/bin"
+        - "/usr/sbin"
+        - "/sbin"
+        - "/bin"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/usr/share/cmake-4.1/Modules/CMakeFindBinUtils.cmake:238 (find_program)"
+      - "/usr/share/cmake-4.1/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
+      - "CMakeLists.txt:18 (project)"
+    mode: "program"
+    variable: "CMAKE_STRIP"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "x86_64-w64-mingw32-llvm-strip"
+      - "llvm-strip"
+      - "x86_64-w64-mingw32-strip"
+      - "strip"
+    candidate_directories:
+      - "/usr/bin/"
+      - "/usr/local/sbin/"
+      - "/usr/local/bin/"
+      - "/usr/sbin/"
+      - "/sbin/"
+      - "/bin/"
+    searched_directories:
+      - "/usr/bin/x86_64-w64-mingw32-llvm-strip"
+      - "/usr/local/sbin/x86_64-w64-mingw32-llvm-strip"
+      - "/usr/local/bin/x86_64-w64-mingw32-llvm-strip"
+      - "/usr/sbin/x86_64-w64-mingw32-llvm-strip"
+      - "/sbin/x86_64-w64-mingw32-llvm-strip"
+      - "/bin/x86_64-w64-mingw32-llvm-strip"
+      - "/usr/bin/llvm-strip"
+      - "/usr/local/sbin/llvm-strip"
+      - "/usr/local/bin/llvm-strip"
+      - "/usr/sbin/llvm-strip"
+      - "/sbin/llvm-strip"
+      - "/bin/llvm-strip"
+    found: "/usr/bin/x86_64-w64-mingw32-strip"
+    search_context:
+      ENV{PATH}:
+        - "/usr/local/sbin"
+        - "/usr/local/bin"
+        - "/usr/bin"
+        - "/usr/sbin"
+        - "/sbin"
+        - "/bin"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/usr/share/cmake-4.1/Modules/CMakeFindBinUtils.cmake:238 (find_program)"
+      - "/usr/share/cmake-4.1/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
+      - "CMakeLists.txt:18 (project)"
+    mode: "program"
+    variable: "CMAKE_LINKER"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "x86_64-w64-mingw32-ld.lld"
+      - "ld.lld"
+      - "x86_64-w64-mingw32-ld"
+      - "ld"
+    candidate_directories:
+      - "/usr/bin/"
+      - "/usr/local/sbin/"
+      - "/usr/local/bin/"
+      - "/usr/sbin/"
+      - "/sbin/"
+      - "/bin/"
+    searched_directories:
+      - "/usr/bin/x86_64-w64-mingw32-ld.lld"
+      - "/usr/local/sbin/x86_64-w64-mingw32-ld.lld"
+      - "/usr/local/bin/x86_64-w64-mingw32-ld.lld"
+      - "/usr/sbin/x86_64-w64-mingw32-ld.lld"
+      - "/sbin/x86_64-w64-mingw32-ld.lld"
+      - "/bin/x86_64-w64-mingw32-ld.lld"
+      - "/usr/bin/ld.lld"
+      - "/usr/local/sbin/ld.lld"
+      - "/usr/local/bin/ld.lld"
+      - "/usr/sbin/ld.lld"
+      - "/sbin/ld.lld"
+      - "/bin/ld.lld"
+    found: "/usr/bin/x86_64-w64-mingw32-ld"
+    search_context:
+      ENV{PATH}:
+        - "/usr/local/sbin"
+        - "/usr/local/bin"
+        - "/usr/bin"
+        - "/usr/sbin"
+        - "/sbin"
+        - "/bin"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/usr/share/cmake-4.1/Modules/CMakeFindBinUtils.cmake:238 (find_program)"
+      - "/usr/share/cmake-4.1/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
+      - "CMakeLists.txt:18 (project)"
+    mode: "program"
+    variable: "CMAKE_NM"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "x86_64-w64-mingw32-llvm-nm"
+      - "llvm-nm"
+      - "x86_64-w64-mingw32-nm"
+      - "nm"
+    candidate_directories:
+      - "/usr/bin/"
+      - "/usr/local/sbin/"
+      - "/usr/local/bin/"
+      - "/usr/sbin/"
+      - "/sbin/"
+      - "/bin/"
+    searched_directories:
+      - "/usr/bin/x86_64-w64-mingw32-llvm-nm"
+      - "/usr/local/sbin/x86_64-w64-mingw32-llvm-nm"
+      - "/usr/local/bin/x86_64-w64-mingw32-llvm-nm"
+      - "/usr/sbin/x86_64-w64-mingw32-llvm-nm"
+      - "/sbin/x86_64-w64-mingw32-llvm-nm"
+      - "/bin/x86_64-w64-mingw32-llvm-nm"
+      - "/usr/bin/llvm-nm"
+      - "/usr/local/sbin/llvm-nm"
+      - "/usr/local/bin/llvm-nm"
+      - "/usr/sbin/llvm-nm"
+      - "/sbin/llvm-nm"
+      - "/bin/llvm-nm"
+    found: "/usr/bin/x86_64-w64-mingw32-nm"
+    search_context:
+      ENV{PATH}:
+        - "/usr/local/sbin"
+        - "/usr/local/bin"
+        - "/usr/bin"
+        - "/usr/sbin"
+        - "/sbin"
+        - "/bin"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/usr/share/cmake-4.1/Modules/CMakeFindBinUtils.cmake:238 (find_program)"
+      - "/usr/share/cmake-4.1/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
+      - "CMakeLists.txt:18 (project)"
+    mode: "program"
+    variable: "CMAKE_OBJDUMP"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "x86_64-w64-mingw32-llvm-objdump"
+      - "llvm-objdump"
+      - "x86_64-w64-mingw32-objdump"
+      - "objdump"
+    candidate_directories:
+      - "/usr/bin/"
+      - "/usr/local/sbin/"
+      - "/usr/local/bin/"
+      - "/usr/sbin/"
+      - "/sbin/"
+      - "/bin/"
+    searched_directories:
+      - "/usr/bin/x86_64-w64-mingw32-llvm-objdump"
+      - "/usr/local/sbin/x86_64-w64-mingw32-llvm-objdump"
+      - "/usr/local/bin/x86_64-w64-mingw32-llvm-objdump"
+      - "/usr/sbin/x86_64-w64-mingw32-llvm-objdump"
+      - "/sbin/x86_64-w64-mingw32-llvm-objdump"
+      - "/bin/x86_64-w64-mingw32-llvm-objdump"
+      - "/usr/bin/llvm-objdump"
+      - "/usr/local/sbin/llvm-objdump"
+      - "/usr/local/bin/llvm-objdump"
+      - "/usr/sbin/llvm-objdump"
+      - "/sbin/llvm-objdump"
+      - "/bin/llvm-objdump"
+    found: "/usr/bin/x86_64-w64-mingw32-objdump"
+    search_context:
+      ENV{PATH}:
+        - "/usr/local/sbin"
+        - "/usr/local/bin"
+        - "/usr/bin"
+        - "/usr/sbin"
+        - "/sbin"
+        - "/bin"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/usr/share/cmake-4.1/Modules/CMakeFindBinUtils.cmake:238 (find_program)"
+      - "/usr/share/cmake-4.1/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
+      - "CMakeLists.txt:18 (project)"
+    mode: "program"
+    variable: "CMAKE_OBJCOPY"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "x86_64-w64-mingw32-llvm-objcopy"
+      - "llvm-objcopy"
+      - "x86_64-w64-mingw32-objcopy"
+      - "objcopy"
+    candidate_directories:
+      - "/usr/bin/"
+      - "/usr/local/sbin/"
+      - "/usr/local/bin/"
+      - "/usr/sbin/"
+      - "/sbin/"
+      - "/bin/"
+    searched_directories:
+      - "/usr/bin/x86_64-w64-mingw32-llvm-objcopy"
+      - "/usr/local/sbin/x86_64-w64-mingw32-llvm-objcopy"
+      - "/usr/local/bin/x86_64-w64-mingw32-llvm-objcopy"
+      - "/usr/sbin/x86_64-w64-mingw32-llvm-objcopy"
+      - "/sbin/x86_64-w64-mingw32-llvm-objcopy"
+      - "/bin/x86_64-w64-mingw32-llvm-objcopy"
+      - "/usr/bin/llvm-objcopy"
+      - "/usr/local/sbin/llvm-objcopy"
+      - "/usr/local/bin/llvm-objcopy"
+      - "/usr/sbin/llvm-objcopy"
+      - "/sbin/llvm-objcopy"
+      - "/bin/llvm-objcopy"
+    found: "/usr/bin/x86_64-w64-mingw32-objcopy"
+    search_context:
+      ENV{PATH}:
+        - "/usr/local/sbin"
+        - "/usr/local/bin"
+        - "/usr/bin"
+        - "/usr/sbin"
+        - "/sbin"
+        - "/bin"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/usr/share/cmake-4.1/Modules/CMakeFindBinUtils.cmake:238 (find_program)"
+      - "/usr/share/cmake-4.1/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
+      - "CMakeLists.txt:18 (project)"
+    mode: "program"
+    variable: "CMAKE_READELF"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "x86_64-w64-mingw32-llvm-readelf"
+      - "llvm-readelf"
+      - "x86_64-w64-mingw32-readelf"
+      - "readelf"
+    candidate_directories:
+      - "/usr/bin/"
+      - "/usr/local/sbin/"
+      - "/usr/local/bin/"
+      - "/usr/sbin/"
+      - "/sbin/"
+      - "/bin/"
+    searched_directories:
+      - "/usr/bin/x86_64-w64-mingw32-llvm-readelf"
+      - "/usr/local/sbin/x86_64-w64-mingw32-llvm-readelf"
+      - "/usr/local/bin/x86_64-w64-mingw32-llvm-readelf"
+      - "/usr/sbin/x86_64-w64-mingw32-llvm-readelf"
+      - "/sbin/x86_64-w64-mingw32-llvm-readelf"
+      - "/bin/x86_64-w64-mingw32-llvm-readelf"
+      - "/usr/bin/llvm-readelf"
+      - "/usr/local/sbin/llvm-readelf"
+      - "/usr/local/bin/llvm-readelf"
+      - "/usr/sbin/llvm-readelf"
+      - "/sbin/llvm-readelf"
+      - "/bin/llvm-readelf"
+    found: "/usr/bin/x86_64-w64-mingw32-readelf"
+    search_context:
+      ENV{PATH}:
+        - "/usr/local/sbin"
+        - "/usr/local/bin"
+        - "/usr/bin"
+        - "/usr/sbin"
+        - "/sbin"
+        - "/bin"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/usr/share/cmake-4.1/Modules/CMakeFindBinUtils.cmake:238 (find_program)"
+      - "/usr/share/cmake-4.1/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
+      - "CMakeLists.txt:18 (project)"
+    mode: "program"
+    variable: "CMAKE_DLLTOOL"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "x86_64-w64-mingw32-llvm-dlltool"
+      - "llvm-dlltool"
+      - "x86_64-w64-mingw32-dlltool"
+      - "dlltool"
+    candidate_directories:
+      - "/usr/bin/"
+      - "/usr/local/sbin/"
+      - "/usr/local/bin/"
+      - "/usr/sbin/"
+      - "/sbin/"
+      - "/bin/"
+    searched_directories:
+      - "/usr/bin/x86_64-w64-mingw32-llvm-dlltool"
+      - "/usr/local/sbin/x86_64-w64-mingw32-llvm-dlltool"
+      - "/usr/local/bin/x86_64-w64-mingw32-llvm-dlltool"
+      - "/usr/sbin/x86_64-w64-mingw32-llvm-dlltool"
+      - "/sbin/x86_64-w64-mingw32-llvm-dlltool"
+      - "/bin/x86_64-w64-mingw32-llvm-dlltool"
+      - "/usr/bin/llvm-dlltool"
+      - "/usr/local/sbin/llvm-dlltool"
+      - "/usr/local/bin/llvm-dlltool"
+      - "/usr/sbin/llvm-dlltool"
+      - "/sbin/llvm-dlltool"
+      - "/bin/llvm-dlltool"
+    found: "/usr/bin/x86_64-w64-mingw32-dlltool"
+    search_context:
+      ENV{PATH}:
+        - "/usr/local/sbin"
+        - "/usr/local/bin"
+        - "/usr/bin"
+        - "/usr/sbin"
+        - "/sbin"
+        - "/bin"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/usr/share/cmake-4.1/Modules/CMakeFindBinUtils.cmake:238 (find_program)"
+      - "/usr/share/cmake-4.1/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
+      - "CMakeLists.txt:18 (project)"
+    mode: "program"
+    variable: "CMAKE_ADDR2LINE"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "x86_64-w64-mingw32-llvm-addr2line"
+      - "llvm-addr2line"
+      - "x86_64-w64-mingw32-addr2line"
+      - "addr2line"
+    candidate_directories:
+      - "/usr/bin/"
+      - "/usr/local/sbin/"
+      - "/usr/local/bin/"
+      - "/usr/sbin/"
+      - "/sbin/"
+      - "/bin/"
+    searched_directories:
+      - "/usr/bin/x86_64-w64-mingw32-llvm-addr2line"
+      - "/usr/local/sbin/x86_64-w64-mingw32-llvm-addr2line"
+      - "/usr/local/bin/x86_64-w64-mingw32-llvm-addr2line"
+      - "/usr/sbin/x86_64-w64-mingw32-llvm-addr2line"
+      - "/sbin/x86_64-w64-mingw32-llvm-addr2line"
+      - "/bin/x86_64-w64-mingw32-llvm-addr2line"
+      - "/usr/bin/llvm-addr2line"
+      - "/usr/local/sbin/llvm-addr2line"
+      - "/usr/local/bin/llvm-addr2line"
+      - "/usr/sbin/llvm-addr2line"
+      - "/sbin/llvm-addr2line"
+      - "/bin/llvm-addr2line"
+    found: "/usr/bin/x86_64-w64-mingw32-addr2line"
+    search_context:
+      ENV{PATH}:
+        - "/usr/local/sbin"
+        - "/usr/local/bin"
+        - "/usr/bin"
+        - "/usr/sbin"
+        - "/sbin"
+        - "/bin"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/usr/share/cmake-4.1/Modules/CMakeFindBinUtils.cmake:238 (find_program)"
+      - "/usr/share/cmake-4.1/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
+      - "CMakeLists.txt:18 (project)"
+    mode: "program"
+    variable: "CMAKE_TAPI"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "x86_64-w64-mingw32-tapi"
+      - "tapi"
+    candidate_directories:
+      - "/usr/bin/"
+      - "/usr/local/sbin/"
+      - "/usr/local/bin/"
+      - "/usr/sbin/"
+      - "/sbin/"
+      - "/bin/"
+    searched_directories:
+      - "/usr/bin/x86_64-w64-mingw32-tapi"
+      - "/usr/local/sbin/x86_64-w64-mingw32-tapi"
+      - "/usr/local/bin/x86_64-w64-mingw32-tapi"
+      - "/usr/sbin/x86_64-w64-mingw32-tapi"
+      - "/sbin/x86_64-w64-mingw32-tapi"
+      - "/bin/x86_64-w64-mingw32-tapi"
+      - "/usr/bin/tapi"
+      - "/usr/local/sbin/tapi"
+      - "/usr/local/bin/tapi"
+      - "/usr/sbin/tapi"
+      - "/sbin/tapi"
+      - "/bin/tapi"
+    found: false
+    search_context:
+      ENV{PATH}:
+        - "/usr/local/sbin"
+        - "/usr/local/bin"
+        - "/usr/bin"
+        - "/usr/sbin"
+        - "/sbin"
+        - "/bin"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/usr/share/cmake-4.1/Modules/Compiler/Clang-FindBinUtils.cmake:26 (find_program)"
+      - "/usr/share/cmake-4.1/Modules/CMakeDetermineCXXCompiler.cmake:207 (include)"
+      - "CMakeLists.txt:18 (project)"
+    mode: "program"
+    variable: "CMAKE_CXX_COMPILER_AR"
+    description: "LLVM archiver"
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "x86_64-w64-mingw32-llvm-ar-21.1"
+      - "x86_64-w64-mingw32-llvm-ar-21"
+      - "x86_64-w64-mingw32-llvm-ar21"
+      - "x86_64-w64-mingw32-llvm-ar"
+    candidate_directories:
+      - "/home/broskobandi/.apps/llvm-mingw-20251216-ucrt-ubuntu-22.04-x86_64/bin/"
+      - "/usr/bin/"
+      - "/usr/local/sbin/"
+      - "/usr/local/bin/"
+      - "/usr/sbin/"
+      - "/sbin/"
+      - "/bin/"
+    searched_directories:
+      - "/home/broskobandi/.apps/llvm-mingw-20251216-ucrt-ubuntu-22.04-x86_64/bin/x86_64-w64-mingw32-llvm-ar-21.1"
+      - "/usr/bin/x86_64-w64-mingw32-llvm-ar-21.1"
+      - "/usr/local/sbin/x86_64-w64-mingw32-llvm-ar-21.1"
+      - "/usr/local/bin/x86_64-w64-mingw32-llvm-ar-21.1"
+      - "/usr/sbin/x86_64-w64-mingw32-llvm-ar-21.1"
+      - "/sbin/x86_64-w64-mingw32-llvm-ar-21.1"
+      - "/bin/x86_64-w64-mingw32-llvm-ar-21.1"
+      - "/home/broskobandi/.apps/llvm-mingw-20251216-ucrt-ubuntu-22.04-x86_64/bin/x86_64-w64-mingw32-llvm-ar-21"
+      - "/usr/bin/x86_64-w64-mingw32-llvm-ar-21"
+      - "/usr/local/sbin/x86_64-w64-mingw32-llvm-ar-21"
+      - "/usr/local/bin/x86_64-w64-mingw32-llvm-ar-21"
+      - "/usr/sbin/x86_64-w64-mingw32-llvm-ar-21"
+      - "/sbin/x86_64-w64-mingw32-llvm-ar-21"
+      - "/bin/x86_64-w64-mingw32-llvm-ar-21"
+      - "/home/broskobandi/.apps/llvm-mingw-20251216-ucrt-ubuntu-22.04-x86_64/bin/x86_64-w64-mingw32-llvm-ar21"
+      - "/usr/bin/x86_64-w64-mingw32-llvm-ar21"
+      - "/usr/local/sbin/x86_64-w64-mingw32-llvm-ar21"
+      - "/usr/local/bin/x86_64-w64-mingw32-llvm-ar21"
+      - "/usr/sbin/x86_64-w64-mingw32-llvm-ar21"
+      - "/sbin/x86_64-w64-mingw32-llvm-ar21"
+      - "/bin/x86_64-w64-mingw32-llvm-ar21"
+    found: "/home/broskobandi/.apps/llvm-mingw-20251216-ucrt-ubuntu-22.04-x86_64/bin/x86_64-w64-mingw32-llvm-ar"
+    search_context:
+      ENV{PATH}:
+        - "/usr/local/sbin"
+        - "/usr/local/bin"
+        - "/usr/bin"
+        - "/usr/sbin"
+        - "/sbin"
+        - "/bin"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/usr/share/cmake-4.1/Modules/Compiler/Clang-FindBinUtils.cmake:38 (find_program)"
+      - "/usr/share/cmake-4.1/Modules/CMakeDetermineCXXCompiler.cmake:207 (include)"
+      - "CMakeLists.txt:18 (project)"
+    mode: "program"
+    variable: "CMAKE_CXX_COMPILER_RANLIB"
+    description: "Generate index for LLVM archive"
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "x86_64-w64-mingw32-llvm-ranlib-21.1"
+      - "x86_64-w64-mingw32-llvm-ranlib-21"
+      - "x86_64-w64-mingw32-llvm-ranlib21"
+      - "x86_64-w64-mingw32-llvm-ranlib"
+    candidate_directories:
+      - "/home/broskobandi/.apps/llvm-mingw-20251216-ucrt-ubuntu-22.04-x86_64/bin/"
+      - "/usr/bin/"
+      - "/usr/local/sbin/"
+      - "/usr/local/bin/"
+      - "/usr/sbin/"
+      - "/sbin/"
+      - "/bin/"
+    searched_directories:
+      - "/home/broskobandi/.apps/llvm-mingw-20251216-ucrt-ubuntu-22.04-x86_64/bin/x86_64-w64-mingw32-llvm-ranlib-21.1"
+      - "/usr/bin/x86_64-w64-mingw32-llvm-ranlib-21.1"
+      - "/usr/local/sbin/x86_64-w64-mingw32-llvm-ranlib-21.1"
+      - "/usr/local/bin/x86_64-w64-mingw32-llvm-ranlib-21.1"
+      - "/usr/sbin/x86_64-w64-mingw32-llvm-ranlib-21.1"
+      - "/sbin/x86_64-w64-mingw32-llvm-ranlib-21.1"
+      - "/bin/x86_64-w64-mingw32-llvm-ranlib-21.1"
+      - "/home/broskobandi/.apps/llvm-mingw-20251216-ucrt-ubuntu-22.04-x86_64/bin/x86_64-w64-mingw32-llvm-ranlib-21"
+      - "/usr/bin/x86_64-w64-mingw32-llvm-ranlib-21"
+      - "/usr/local/sbin/x86_64-w64-mingw32-llvm-ranlib-21"
+      - "/usr/local/bin/x86_64-w64-mingw32-llvm-ranlib-21"
+      - "/usr/sbin/x86_64-w64-mingw32-llvm-ranlib-21"
+      - "/sbin/x86_64-w64-mingw32-llvm-ranlib-21"
+      - "/bin/x86_64-w64-mingw32-llvm-ranlib-21"
+      - "/home/broskobandi/.apps/llvm-mingw-20251216-ucrt-ubuntu-22.04-x86_64/bin/x86_64-w64-mingw32-llvm-ranlib21"
+      - "/usr/bin/x86_64-w64-mingw32-llvm-ranlib21"
+      - "/usr/local/sbin/x86_64-w64-mingw32-llvm-ranlib21"
+      - "/usr/local/bin/x86_64-w64-mingw32-llvm-ranlib21"
+      - "/usr/sbin/x86_64-w64-mingw32-llvm-ranlib21"
+      - "/sbin/x86_64-w64-mingw32-llvm-ranlib21"
+      - "/bin/x86_64-w64-mingw32-llvm-ranlib21"
+    found: "/home/broskobandi/.apps/llvm-mingw-20251216-ucrt-ubuntu-22.04-x86_64/bin/x86_64-w64-mingw32-llvm-ranlib"
+    search_context:
+      ENV{PATH}:
+        - "/usr/local/sbin"
+        - "/usr/local/bin"
+        - "/usr/bin"
+        - "/usr/sbin"
+        - "/sbin"
+        - "/bin"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/usr/share/cmake-4.1/Modules/Compiler/Clang-FindBinUtils.cmake:50 (find_program)"
+      - "/usr/share/cmake-4.1/Modules/CMakeDetermineCXXCompiler.cmake:207 (include)"
+      - "CMakeLists.txt:18 (project)"
+    mode: "program"
+    variable: "CMAKE_CXX_COMPILER_CLANG_SCAN_DEPS"
+    description: "`clang-scan-deps` dependency scanner"
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "x86_64-w64-mingw32-clang-scan-deps-21.1"
+      - "x86_64-w64-mingw32-clang-scan-deps-21"
+      - "x86_64-w64-mingw32-clang-scan-deps21"
+      - "x86_64-w64-mingw32-clang-scan-deps"
+    candidate_directories:
+      - "/home/broskobandi/.apps/llvm-mingw-20251216-ucrt-ubuntu-22.04-x86_64/bin/"
+      - "/usr/bin/"
+      - "/usr/local/sbin/"
+      - "/usr/local/bin/"
+      - "/usr/sbin/"
+      - "/sbin/"
+      - "/bin/"
+    searched_directories:
+      - "/home/broskobandi/.apps/llvm-mingw-20251216-ucrt-ubuntu-22.04-x86_64/bin/x86_64-w64-mingw32-clang-scan-deps-21.1"
+      - "/usr/bin/x86_64-w64-mingw32-clang-scan-deps-21.1"
+      - "/usr/local/sbin/x86_64-w64-mingw32-clang-scan-deps-21.1"
+      - "/usr/local/bin/x86_64-w64-mingw32-clang-scan-deps-21.1"
+      - "/usr/sbin/x86_64-w64-mingw32-clang-scan-deps-21.1"
+      - "/sbin/x86_64-w64-mingw32-clang-scan-deps-21.1"
+      - "/bin/x86_64-w64-mingw32-clang-scan-deps-21.1"
+      - "/home/broskobandi/.apps/llvm-mingw-20251216-ucrt-ubuntu-22.04-x86_64/bin/x86_64-w64-mingw32-clang-scan-deps-21"
+      - "/usr/bin/x86_64-w64-mingw32-clang-scan-deps-21"
+      - "/usr/local/sbin/x86_64-w64-mingw32-clang-scan-deps-21"
+      - "/usr/local/bin/x86_64-w64-mingw32-clang-scan-deps-21"
+      - "/usr/sbin/x86_64-w64-mingw32-clang-scan-deps-21"
+      - "/sbin/x86_64-w64-mingw32-clang-scan-deps-21"
+      - "/bin/x86_64-w64-mingw32-clang-scan-deps-21"
+      - "/home/broskobandi/.apps/llvm-mingw-20251216-ucrt-ubuntu-22.04-x86_64/bin/x86_64-w64-mingw32-clang-scan-deps21"
+      - "/usr/bin/x86_64-w64-mingw32-clang-scan-deps21"
+      - "/usr/local/sbin/x86_64-w64-mingw32-clang-scan-deps21"
+      - "/usr/local/bin/x86_64-w64-mingw32-clang-scan-deps21"
+      - "/usr/sbin/x86_64-w64-mingw32-clang-scan-deps21"
+      - "/sbin/x86_64-w64-mingw32-clang-scan-deps21"
+      - "/bin/x86_64-w64-mingw32-clang-scan-deps21"
+    found: "/home/broskobandi/.apps/llvm-mingw-20251216-ucrt-ubuntu-22.04-x86_64/bin/x86_64-w64-mingw32-clang-scan-deps"
+    search_context:
+      ENV{PATH}:
+        - "/usr/local/sbin"
+        - "/usr/local/bin"
+        - "/usr/bin"
+        - "/usr/sbin"
+        - "/sbin"
+        - "/bin"
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake-4.1/Modules/CMakeDetermineCompilerABI.cmake:83 (try_compile)"
+      - "/usr/share/cmake-4.1/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:18 (project)"
+    checks:
+      - "Detecting CXX compiler ABI info"
+    directories:
+      source: "/home/broskobandi/Projects/dwarf-cpp23/build-win/CMakeFiles/CMakeScratch/TryCompile-Xb7fPw"
+      binary: "/home/broskobandi/Projects/dwarf-cpp23/build-win/CMakeFiles/CMakeScratch/TryCompile-Xb7fPw"
+    cmakeVariables:
+      CMAKE_CXX_COMPILER_CLANG_SCAN_DEPS: "/home/broskobandi/.apps/llvm-mingw-20251216-ucrt-ubuntu-22.04-x86_64/bin/x86_64-w64-mingw32-clang-scan-deps"
+      CMAKE_CXX_FLAGS: " -stdlib=libc++"
+      CMAKE_CXX_FLAGS_DEBUG: "-g"
+      CMAKE_CXX_SCAN_FOR_MODULES: "OFF"
+      CMAKE_EXE_LINKER_FLAGS: ""
+    buildResult:
+      variable: "CMAKE_CXX_ABI_COMPILED"
+      cached: true
+      stdout: |
+        Change Dir: '/home/broskobandi/Projects/dwarf-cpp23/build-win/CMakeFiles/CMakeScratch/TryCompile-Xb7fPw'
+        
+        Run Build Command(s): /usr/bin/ninja -v cmTC_7a852
+        [1/2] /usr/bin/x86_64-w64-mingw32-clang++   -stdlib=libc++  -std=c++23   -v -MD -MT CMakeFiles/cmTC_7a852.dir/CMakeCXXCompilerABI.cpp.o -MF CMakeFiles/cmTC_7a852.dir/CMakeCXXCompilerABI.cpp.o.d -o CMakeFiles/cmTC_7a852.dir/CMakeCXXCompilerABI.cpp.o -c /usr/share/cmake-4.1/Modules/CMakeCXXCompilerABI.cpp
+        clang version 21.1.8 (https://github.com/llvm/llvm-project.git 2078da43e25a4623cab2d0d60decddf709aaea28)
+        Target: x86_64-w64-windows-gnu
+        Thread model: posix
+        InstalledDir: /home/broskobandi/.apps/llvm-mingw-20251216-ucrt-ubuntu-22.04-x86_64/bin
+        Configuration file: /home/broskobandi/.apps/llvm-mingw-20251216-ucrt-ubuntu-22.04-x86_64/bin/x86_64-w64-windows-gnu.cfg
+         (in-process)
+         "/home/broskobandi/.apps/llvm-mingw-20251216-ucrt-ubuntu-22.04-x86_64/bin/clang-21" -cc1 -triple x86_64-w64-windows-gnu -emit-obj -disable-free -clear-ast-before-backend -disable-llvm-verifier -discard-value-names -main-file-name CMakeCXXCompilerABI.cpp -mrelocation-model pic -pic-level 2 -mframe-pointer=none -fmath-errno -ffp-contract=on -fno-rounding-math -mconstructor-aliases -mms-bitfields -funwind-tables=2 -fno-sized-deallocation -fno-use-init-array -target-cpu x86-64 -tune-cpu generic -debugger-tuning=gdb -fdebug-compilation-dir=/home/broskobandi/Projects/dwarf-cpp23/build-win/CMakeFiles/CMakeScratch/TryCompile-Xb7fPw -v -fcoverage-compilation-dir=/home/broskobandi/Projects/dwarf-cpp23/build-win/CMakeFiles/CMakeScratch/TryCompile-Xb7fPw -resource-dir /home/broskobandi/.apps/llvm-mingw-20251216-ucrt-ubuntu-22.04-x86_64/lib/clang/21 -dependency-file CMakeFiles/cmTC_7a852.dir/CMakeCXXCompilerABI.cpp.o.d -MT CMakeFiles/cmTC_7a852.dir/CMakeCXXCompilerABI.cpp.o -sys-header-deps -internal-isystem /home/broskobandi/.apps/llvm-mingw-20251216-ucrt-ubuntu-22.04-x86_64/x86_64-w64-mingw32/include/c++/v1 -internal-isystem /home/broskobandi/.apps/llvm-mingw-20251216-ucrt-ubuntu-22.04-x86_64/include/c++/v1 -internal-isystem /home/broskobandi/.apps/llvm-mingw-20251216-ucrt-ubuntu-22.04-x86_64/lib/clang/21/include -internal-isystem /home/broskobandi/.apps/llvm-mingw-20251216-ucrt-ubuntu-22.04-x86_64/x86_64-w64-mingw32/include -internal-isystem /home/broskobandi/.apps/llvm-mingw-20251216-ucrt-ubuntu-22.04-x86_64/x86_64-w64-mingw32/usr/include -std=c++23 -fdeprecated-macro -ferror-limit 19 -fno-use-cxa-atexit -fgnuc-version=4.2.1 -fno-implicit-modules -fskip-odr-check-in-gmf -fcxx-exceptions -fexceptions -exception-model=seh -faddrsig -o CMakeFiles/cmTC_7a852.dir/CMakeCXXCompilerABI.cpp.o -x c++ /usr/share/cmake-4.1/Modules/CMakeCXXCompilerABI.cpp
+        clang -cc1 version 21.1.8 based upon LLVM 21.1.8 default target x86_64-unknown-linux-gnu
+        ignoring nonexistent directory "/home/broskobandi/.apps/llvm-mingw-20251216-ucrt-ubuntu-22.04-x86_64/include/c++/v1"
+        ignoring nonexistent directory "/home/broskobandi/.apps/llvm-mingw-20251216-ucrt-ubuntu-22.04-x86_64/x86_64-w64-mingw32/usr/include"
+        #include "..." search starts here:
+        #include <...> search starts here:
+         /home/broskobandi/.apps/llvm-mingw-20251216-ucrt-ubuntu-22.04-x86_64/x86_64-w64-mingw32/include/c++/v1
+         /home/broskobandi/.apps/llvm-mingw-20251216-ucrt-ubuntu-22.04-x86_64/lib/clang/21/include
+         /home/broskobandi/.apps/llvm-mingw-20251216-ucrt-ubuntu-22.04-x86_64/x86_64-w64-mingw32/include
+        End of search list.
+        [2/2] : && /usr/bin/x86_64-w64-mingw32-clang++ -stdlib=libc++ -v -Wl,-v CMakeFiles/cmTC_7a852.dir/CMakeCXXCompilerABI.cpp.o -o cmTC_7a852   && :
+        clang version 21.1.8 (https://github.com/llvm/llvm-project.git 2078da43e25a4623cab2d0d60decddf709aaea28)
+        Target: x86_64-w64-windows-gnu
+        Thread model: posix
+        InstalledDir: /home/broskobandi/.apps/llvm-mingw-20251216-ucrt-ubuntu-22.04-x86_64/bin
+        Configuration file: /home/broskobandi/.apps/llvm-mingw-20251216-ucrt-ubuntu-22.04-x86_64/bin/x86_64-w64-windows-gnu.cfg
+         "/home/broskobandi/.apps/llvm-mingw-20251216-ucrt-ubuntu-22.04-x86_64/bin/ld.lld" -m i386pep -Bdynamic -o cmTC_7a852.exe /home/broskobandi/.apps/llvm-mingw-20251216-ucrt-ubuntu-22.04-x86_64/x86_64-w64-mingw32/lib/crt2.o /home/broskobandi/.apps/llvm-mingw-20251216-ucrt-ubuntu-22.04-x86_64/x86_64-w64-mingw32/lib/crtbegin.o -L/home/broskobandi/.apps/llvm-mingw-20251216-ucrt-ubuntu-22.04-x86_64/x86_64-w64-mingw32/lib -L/home/broskobandi/.apps/llvm-mingw-20251216-ucrt-ubuntu-22.04-x86_64/x86_64-w64-mingw32/mingw/lib -L/home/broskobandi/.apps/llvm-mingw-20251216-ucrt-ubuntu-22.04-x86_64/lib/clang/21/lib/windows -v CMakeFiles/cmTC_7a852.dir/CMakeCXXCompilerABI.cpp.o -lc++ -lmingw32 /home/broskobandi/.apps/llvm-mingw-20251216-ucrt-ubuntu-22.04-x86_64/lib/clang/21/lib/windows/libclang_rt.builtins-x86_64.a -lunwind -lmoldname -lmingwex -lmsvcrt -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 /home/broskobandi/.apps/llvm-mingw-20251216-ucrt-ubuntu-22.04-x86_64/lib/clang/21/lib/windows/libclang_rt.builtins-x86_64.a -lunwind -lmoldname -lmingwex -lmsvcrt -lkernel32 /home/broskobandi/.apps/llvm-mingw-20251216-ucrt-ubuntu-22.04-x86_64/x86_64-w64-mingw32/lib/crtend.o
+        LLD 21.1.8 (https://github.com/llvm/llvm-project.git 2078da43e25a4623cab2d0d60decddf709aaea28) (compatible with GNU linkers)
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake-4.1/Modules/CMakeTestCXXCompiler.cmake:56 (try_compile)"
+      - "CMakeLists.txt:18 (project)"
+    checks:
+      - "Check for working CXX compiler: /usr/bin/x86_64-w64-mingw32-clang++"
+    directories:
+      source: "/home/broskobandi/Projects/dwarf-cpp23/build-win/CMakeFiles/CMakeScratch/TryCompile-7eqowg"
+      binary: "/home/broskobandi/Projects/dwarf-cpp23/build-win/CMakeFiles/CMakeScratch/TryCompile-7eqowg"
+    cmakeVariables:
+      CMAKE_CXX_COMPILER_CLANG_SCAN_DEPS: "/home/broskobandi/.apps/llvm-mingw-20251216-ucrt-ubuntu-22.04-x86_64/bin/x86_64-w64-mingw32-clang-scan-deps"
+      CMAKE_CXX_FLAGS: " -stdlib=libc++"
+      CMAKE_CXX_FLAGS_DEBUG: "-g"
+      CMAKE_CXX_SCAN_FOR_MODULES: "OFF"
+      CMAKE_EXE_LINKER_FLAGS: ""
+    buildResult:
+      variable: "CMAKE_CXX_COMPILER_WORKS"
+      cached: true
+      stdout: |
+        Change Dir: '/home/broskobandi/Projects/dwarf-cpp23/build-win/CMakeFiles/CMakeScratch/TryCompile-7eqowg'
+        
+        Run Build Command(s): /usr/bin/ninja -v cmTC_6a52b
+        [1/2] /usr/bin/x86_64-w64-mingw32-clang++   -stdlib=libc++  -std=c++23 -MD -MT CMakeFiles/cmTC_6a52b.dir/testCXXCompiler.cxx.o -MF CMakeFiles/cmTC_6a52b.dir/testCXXCompiler.cxx.o.d -o CMakeFiles/cmTC_6a52b.dir/testCXXCompiler.cxx.o -c /home/broskobandi/Projects/dwarf-cpp23/build-win/CMakeFiles/CMakeScratch/TryCompile-7eqowg/testCXXCompiler.cxx
+        [2/2] : && /usr/bin/x86_64-w64-mingw32-clang++ -stdlib=libc++  CMakeFiles/cmTC_6a52b.dir/testCXXCompiler.cxx.o -o cmTC_6a52b   && :
+        
+      exitCode: 0
+...

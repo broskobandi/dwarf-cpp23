@@ -1,0 +1,82 @@
+{
+	"bmi-installation" : null,
+	"compiler-frontend-variant" : "GNU",
+	"compiler-id" : "Clang",
+	"compiler-simulate-id" : "",
+	"config" : "",
+	"cxx-modules" : 
+	{
+		"CMakeFiles/dwarf.dir/src/game.cppm.o" : 
+		{
+			"bmi-only" : false,
+			"destination" : null,
+			"name" : "modules",
+			"relative-directory" : "src",
+			"source" : "/home/broskobandi/Projects/dwarf-cpp23/src/game.cppm",
+			"type" : "CXX_MODULES",
+			"visibility" : "PRIVATE"
+		},
+		"CMakeFiles/dwarf.dir/src/ground.cppm.o" : 
+		{
+			"bmi-only" : false,
+			"destination" : null,
+			"name" : "modules",
+			"relative-directory" : "src",
+			"source" : "/home/broskobandi/Projects/dwarf-cpp23/src/ground.cppm",
+			"type" : "CXX_MODULES",
+			"visibility" : "PRIVATE"
+		},
+		"CMakeFiles/dwarf.dir/src/init.cppm.o" : 
+		{
+			"bmi-only" : false,
+			"destination" : null,
+			"name" : "modules",
+			"relative-directory" : "src",
+			"source" : "/home/broskobandi/Projects/dwarf-cpp23/src/init.cppm",
+			"type" : "CXX_MODULES",
+			"visibility" : "PRIVATE"
+		},
+		"CMakeFiles/dwarf.dir/src/sdl.cppm.o" : 
+		{
+			"bmi-only" : false,
+			"destination" : null,
+			"name" : "modules",
+			"relative-directory" : "src",
+			"source" : "/home/broskobandi/Projects/dwarf-cpp23/src/sdl.cppm",
+			"type" : "CXX_MODULES",
+			"visibility" : "PRIVATE"
+		},
+		"CMakeFiles/dwarf.dir/usr/lib/llvm/21/share/libc++/v1/std.cppm.o" : 
+		{
+			"bmi-only" : false,
+			"destination" : null,
+			"name" : "modules",
+			"relative-directory" : "",
+			"source" : "/usr/lib/llvm/21/share/libc++/v1/std.cppm",
+			"type" : "CXX_MODULES",
+			"visibility" : "PRIVATE"
+		}
+	},
+	"database-info" : null,
+	"dir-cur-bld" : "/home/broskobandi/Projects/dwarf-cpp23/build-win",
+	"dir-cur-src" : "/home/broskobandi/Projects/dwarf-cpp23",
+	"dir-top-bld" : "/home/broskobandi/Projects/dwarf-cpp23/build-win",
+	"dir-top-src" : "/home/broskobandi/Projects/dwarf-cpp23",
+	"exports" : [],
+	"forward-modules-from-target-dirs" : [],
+	"include-dirs" : 
+	[
+		"/home/broskobandi/Projects/dwarf-cpp23/SDL2-2.32.8/x86_64-w64-mingw32/include"
+	],
+	"language" : "CXX",
+	"linked-target-dirs" : [],
+	"module-dir" : "/home/broskobandi/Projects/dwarf-cpp23/build-win/CMakeFiles/dwarf.dir",
+	"sources" : 
+	{
+		"CMakeFiles/dwarf.dir/src/main.cpp.o" : 
+		{
+			"language" : "CXX",
+			"source" : "/home/broskobandi/Projects/dwarf-cpp23/src/main.cpp"
+		}
+	}
+}

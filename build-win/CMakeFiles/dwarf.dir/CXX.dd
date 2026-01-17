@@ -1,0 +1,18 @@
+ninja_dyndep_version = 1.0
+build CMakeFiles/dwarf.dir/src/main.cpp.o: dyndep | CMakeFiles/dwarf.dir/std.pcm CMakeFiles/dwarf.dir/game.pcm
+
+build CMakeFiles/dwarf.dir/src/game.cppm.o | CMakeFiles/dwarf.dir/game.pcm: dyndep | CMakeFiles/dwarf.dir/std.pcm CMakeFiles/dwarf.dir/sdl.pcm CMakeFiles/dwarf.dir/ground.pcm CMakeFiles/dwarf.dir/init.pcm
+  restat = 1
+
+build CMakeFiles/dwarf.dir/src/ground.cppm.o | CMakeFiles/dwarf.dir/ground.pcm: dyndep | CMakeFiles/dwarf.dir/std.pcm CMakeFiles/dwarf.dir/init.pcm CMakeFiles/dwarf.dir/sdl.pcm
+  restat = 1
+
+build CMakeFiles/dwarf.dir/src/init.cppm.o | CMakeFiles/dwarf.dir/init.pcm: dyndep | CMakeFiles/dwarf.dir/std.pcm
+  restat = 1
+
+build CMakeFiles/dwarf.dir/src/sdl.cppm.o | CMakeFiles/dwarf.dir/sdl.pcm: dyndep | CMakeFiles/dwarf.dir/std.pcm
+  restat = 1
+
+build CMakeFiles/dwarf.dir/usr/lib/llvm/21/share/libc++/v1/std.cppm.o | CMakeFiles/dwarf.dir/std.pcm: dyndep
+  restat = 1
+
