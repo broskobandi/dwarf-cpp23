@@ -1,3 +1,0 @@
--x c++-module
--fmodule-output=CMakeFiles/dwarf.dir/init.pcm
--fmodule-file=std=CMakeFiles/dwarf.dir/std.pcm

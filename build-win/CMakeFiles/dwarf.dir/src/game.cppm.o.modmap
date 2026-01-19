@@ -1,6 +1,0 @@
--x c++-module
--fmodule-output=CMakeFiles/dwarf.dir/game.pcm
--fmodule-file=std=CMakeFiles/dwarf.dir/std.pcm
--fmodule-file=sdl=CMakeFiles/dwarf.dir/sdl.pcm
--fmodule-file=ground=CMakeFiles/dwarf.dir/ground.pcm
--fmodule-file=init=CMakeFiles/dwarf.dir/init.pcm
