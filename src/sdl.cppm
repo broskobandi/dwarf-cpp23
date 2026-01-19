@@ -33,6 +33,14 @@ private:
 			static_cast<int>(h)
 		};
 	}
+public:
+	bool has_intersection(const Rect& other) const {
+		SDL_Rect this_rect = this->to_sdl();
+		SDL_Rect other_rect = other.to_sdl();
+		return static_cast<bool>(SDL_HasIntersection(
+			&this_rect, &other_rect)
+		);
+	}
 };
 
 export struct FRect {
@@ -41,8 +49,45 @@ public:
 private:
 	friend class Sdl;
 	SDL_FRect to_sdl() const {
-		return SDL_FRect {
-			x, y, w, h
+		return SDL_FRect {x, y, w, h};
+	}
+public:
+	bool has_intersection(const FRect& other) const {
+		SDL_FRect this_rect = this->to_sdl();
+		SDL_FRect other_rect = other.to_sdl();
+		return static_cast<bool>(SDL_HasIntersectionF(
+			&this_rect, &other_rect
+		));
+	}
+	bool operator==(const FRect& other) const {
+		return	x == other.x &&
+			y == other.y &&
+			w == other.w &&
+			h == other.h;
+	}
+};
+
+export struct Point {
+public:
+	std::uint32_t x, y;
+private:
+	friend class Sdl;
+	SDL_Point to_sdl() const {
+		return SDL_Point {
+			static_cast<int>(x),
+			static_cast<int>(y)
+		};
+	}
+};
+
+export struct FPoint {
+public:
+	float x, y;
+private:
+	friend class Sdl;
+	SDL_FPoint to_sdl() const {
+		return SDL_FPoint {
+			x, y
 		};
 	}
 };
@@ -358,161 +403,185 @@ export enum class EventType : std::size_t {
 	LASTEVENT = SDL_LASTEVENT,
 };
 
-// export class Sdl : GameInitData {
 export class Sdl {
+
 private:
-	std::vector<SDL_Texture*> textures;
-	std::vector<std::filesystem::path> loaded_tex_paths;
-	SDL_Window* win;
-	SDL_Renderer* ren;
-	SDL_Event event;
 
-	uint8_t bg_r, bg_g, bg_b;
+std::vector<SDL_Texture*> textures;
+std::vector<std::filesystem::path> loaded_tex_paths;
+SDL_Window* win;
+SDL_Renderer* ren;
+SDL_Event event;
+
+uint8_t bg_r, bg_g, bg_b;
+
 public:
-	Sdl(
-		// GameInitData game_init_data
-		std::string title,
-		uint32_t win_w,
-		uint32_t win_h,
-		bool vsync,
-		uint8_t bg_r,
-		uint8_t bg_g,
-		uint8_t bg_b
-	) :
-		// GameInitData(game_init_data)
-		bg_r(bg_r),
-		bg_g(bg_g),
-		bg_b(bg_b)
 
-	{
-		static bool init {false};
+Sdl(
+	// GameInitData game_init_data
+	std::string title,
+	uint32_t win_w,
+	uint32_t win_h,
+	bool vsync,
+	uint8_t bg_r,
+	uint8_t bg_g,
+	uint8_t bg_b
+) :
+	// GameInitData(game_init_data)
+	bg_r(bg_r),
+	bg_g(bg_g),
+	bg_b(bg_b)
 
-		if (init)
-			throw runtime_error("Sdl cannot be initalized twice.");
-	
-		if (SDL_Init(SDL_INIT_EVERYTHING))
-			throw runtime_error("Failed to init SDL.");
-		init = true;
-		dbg("SDL initialized.");
+{
+	static bool init {false};
 
-		win = SDL_CreateWindow(
-			title.c_str(),
-			SDL_WINDOWPOS_CENTERED,
-			SDL_WINDOWPOS_CENTERED,
-			static_cast<int>(win_w),
-			static_cast<int>(win_h),
-			SDL_WINDOW_SHOWN
-		);
-		if (!win)
-			throw runtime_error("Failed to create window.");
-		dbg("Window created.");
+	if (init)
+		throw runtime_error("Sdl cannot be initalized twice.");
 
-		ren = SDL_CreateRenderer(
-			win,
-			-1,
-			vsync ? SDL_RENDERER_PRESENTVSYNC : 0
-		);
-		if (!ren)
-			throw runtime_error("Failed to create renderer.");
-		dbg("Renderer created.");
+	if (SDL_Init(SDL_INIT_EVERYTHING))
+		throw runtime_error("Failed to init SDL.");
+	init = true;
+	dbg("SDL initialized.");
 
-		if (SDL_SetRenderDrawBlendMode(ren, SDL_BLENDMODE_BLEND))
-			throw runtime_error("Failed to set blend mode.");
+	win = SDL_CreateWindow(
+		title.c_str(),
+		SDL_WINDOWPOS_CENTERED,
+		SDL_WINDOWPOS_CENTERED,
+		static_cast<int>(win_w),
+		static_cast<int>(win_h),
+		SDL_WINDOW_SHOWN
+	);
+	if (!win)
+		throw runtime_error("Failed to create window.");
+	dbg("Window created.");
+
+	ren = SDL_CreateRenderer(
+		win,
+		-1,
+		vsync ? SDL_RENDERER_PRESENTVSYNC : 0
+	);
+	if (!ren)
+		throw runtime_error("Failed to create renderer.");
+	dbg("Renderer created.");
+
+	if (SDL_SetRenderDrawBlendMode(ren, SDL_BLENDMODE_BLEND))
+		throw runtime_error("Failed to set blend mode.");
+}
+bool poll_events() {
+	return SDL_PollEvent(&event);
+}
+bool has_type(EventType type) const {
+	return event.type == static_cast<SDL_EventType>(type);
+}
+bool has_key(Key key) const {
+	return event.key.keysym.sym == static_cast<SDL_Keycode>(key);
+}
+void set_draw_color(Color color) const {
+	if (SDL_SetRenderDrawColor(
+		ren,
+		color.r,
+		color.g,
+		color.b,
+		color.a)
+	) {
+		throw runtime_error("Failed to set draw color.");
 	}
-	bool poll_events() {
-		return SDL_PollEvent(&event);
-	}
-	bool has_type(EventType type) const {
-		return event.type == static_cast<SDL_EventType>(type);
-	}
-	bool has_key(Key key) const {
-		return event.key.keysym.sym == static_cast<SDL_Keycode>(key);
-	}
-	void set_draw_color(Color color) const {
-		if (SDL_SetRenderDrawColor(
-			ren,
-			color.r,
-			color.g,
-			color.b,
-			color.a)
-		) {
-			throw runtime_error("Failed to set draw color.");
+}
+void clear() const {
+	set_draw_color({bg_r, bg_g, bg_b, 255});
+	if (SDL_RenderClear(ren))
+		throw runtime_error("Failed to clear renderer.");
+}
+void present() const {
+	SDL_RenderPresent(ren);
+}
+size_t texture(std::filesystem::path path_to_bmp) {
+	std::string path = path_to_bmp.string();
+
+	size_t i = 0;
+	for (const auto& p : loaded_tex_paths) {
+		if (p == path) {
+			dbg("Texture has already been loaded.");
+			return i;
 		}
+		i++;
 	}
-	void clear() const {
-		set_draw_color({bg_r, bg_g, bg_b, 255});
-		if (SDL_RenderClear(ren))
-			throw runtime_error("Failed to clear renderer.");
-	}
-	void present() const {
-		SDL_RenderPresent(ren);
-	}
-	size_t texture(std::filesystem::path path_to_bmp) {
-		std::string path = path_to_bmp.string();
 
-		size_t i = 0;
-		for (const auto& p : loaded_tex_paths) {
-			if (p == path) {
-				dbg("Texture has already been loaded.");
-				return i;
-			}
-			i++;
-		}
-
-		auto sur = SDL_LoadBMP(path.c_str());
-		if (!sur) throw runtime_error(
-			"Failed to create surface."
-		);
-		dbg("Surface created.");
+	auto sur = SDL_LoadBMP(path.c_str());
+	if (!sur) throw runtime_error(
+		"Failed to create surface."
+	);
+	dbg("Surface created.");
 
 
-		auto tex = SDL_CreateTextureFromSurface(ren, sur);
-		if (!tex) {
-			SDL_FreeSurface(sur);
-			dbg("Surface freed.");
-			throw runtime_error("Failed to create texture.");
-		}
-		dbg("Texture created.");
-
+	auto tex = SDL_CreateTextureFromSurface(ren, sur);
+	if (!tex) {
 		SDL_FreeSurface(sur);
 		dbg("Surface freed.");
+		throw runtime_error("Failed to create texture.");
+	}
+	dbg("Texture created.");
 
-		textures.push_back(tex);
-		return textures.size() - 1;
-	}
-	void copy_f(size_t tex_id, const Rect& src, const FRect& dst) const {
-		if (tex_id >= textures.size()) throw runtime_error(
-			"Tex_id is out of bounds."
-		);
-		SDL_Rect srcrect = src.to_sdl();
-		SDL_FRect dstrect = dst.to_sdl();
-		if (SDL_RenderCopyF(
-			ren,
-			textures.at(tex_id),
-			&srcrect,
-			&dstrect)
-		) throw runtime_error(
-			"Failed to render texture."
-		);
-	}
-	~Sdl() {
-		if (textures.size()) {
-			for(auto& tex : textures) {
-				if (tex) {
-					SDL_DestroyTexture(tex);
-					dbg("Texture destroyed.");
-				}
+	SDL_FreeSurface(sur);
+	dbg("Surface freed.");
+
+	textures.push_back(tex);
+	return textures.size() - 1;
+}
+void copy_f(size_t tex_id, const Rect& src, const FRect& dst) const {
+	if (tex_id >= textures.size()) throw runtime_error(
+		"Tex_id is out of bounds."
+	);
+	SDL_Rect srcrect = src.to_sdl();
+	SDL_FRect dstrect = dst.to_sdl();
+	if (SDL_RenderCopyF(
+		ren,
+		textures.at(tex_id),
+		&srcrect,
+		&dstrect)
+	) throw runtime_error(
+		"Failed to render texture."
+	);
+}
+Point get_mouse_pos() const {
+	int x, y;
+	SDL_GetMouseState(&x, &y);
+	return {
+		static_cast<std::uint32_t>(x),
+		static_cast<std::uint32_t>(y)
+	};
+}
+bool has_left_button() const {
+	return static_cast<bool>(
+		event.type == SDL_MOUSEBUTTONDOWN &&
+		event.button.button == SDL_BUTTON_LEFT
+	);
+};
+bool has_right_button() const {
+	return static_cast<bool>(
+		event.type == SDL_MOUSEBUTTONDOWN &&
+		event.button.button == SDL_BUTTON_RIGHT
+	);
+};
+~Sdl() {
+	if (textures.size()) {
+		for(auto& tex : textures) {
+			if (tex) {
+				SDL_DestroyTexture(tex);
+				dbg("Texture destroyed.");
 			}
 		}
-		if (ren) {
-			SDL_DestroyRenderer(ren);
-			dbg("Renderer destroyed.");
-		}
-		if (win) {
-			SDL_DestroyWindow(win);
-			dbg("Window destroyed.");
-		}
-		SDL_Quit();
-		dbg("SDL terminated.");
 	}
+	if (ren) {
+		SDL_DestroyRenderer(ren);
+		dbg("Renderer destroyed.");
+	}
+	if (win) {
+		SDL_DestroyWindow(win);
+		dbg("Window destroyed.");
+	}
+	SDL_Quit();
+	dbg("SDL terminated.");
+}
+
 };
