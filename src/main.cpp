@@ -71,7 +71,7 @@ int main(void) {
 	game.run();
 
 	} catch (const std::runtime_error& e) {
-		std::println("{}", e.what());
+		std::println(std::cerr, "{}", e.what());
 	}
 
 	return 0;

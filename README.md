@@ -4,7 +4,7 @@
 ## Todo:
 - [x] Get rid of the nested loops (put the whole tile system in a single vector)
 - [x] Add dynamic shading
-- [ ] Fix selection logic to only apply to visible tiles
+- [x] Fix selection logic to only apply to visible tiles
 - [x] Add animated dwarf
 - [ ] Add layer awareness to dwarf (fall until ground is found)
 - [ ] Add point and click movement to dwarf

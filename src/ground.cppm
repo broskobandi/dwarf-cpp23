@@ -14,6 +14,7 @@ export struct Block {
 	Rect srcrect;
 	bool active {true};
 	bool visible {true};
+	bool blocked_from_above {false};
 	size_t tex_id;
 	vector<Rect> shading;
 	size_t layer;
@@ -166,18 +167,29 @@ public:
 
 			// Visibility
 
-			if (	block.active &&
-				(!blocked_from_above ||
-				 !blocked_from_right_down ||
-				 !blocked_from_left_down ||
-				 !blocked_from_above_down ||
-				 !blocked_from_above_right_down ||
-				 !blocked_from_above_left_down)
-			) {
-				block.visible = true;
-			} else {
-				block.visible = false;
-			}
+			block.visible =
+				!block.active ||
+				(blocked_from_above_right_down &&
+				 blocked_from_above_left_down) ?
+				false : true;
+
+
+			// Selectability
+
+			block.blocked_from_above = blocked_from_above;
+
+			// if (	block.active &&
+				// (!blocked_from_above ||
+				 // !blocked_from_right_down ||
+				 // !blocked_from_left_down ||
+				 // !blocked_from_above_down ||
+				 // !blocked_from_above_right_down ||
+				 // !blocked_from_above_left_down)
+			// ) {
+				// block.visible = true;
+			// } else {
+				// block.visible = false;
+			// }
 
 			// Shading
 			
@@ -230,11 +242,17 @@ public:
 			if (	block.visible &&
 				!blocked_from_above &&
 				!blocked_from_above_down &&
-				!blocked_from_above_right_down &&
-				!blocked_from_above_left_down &&
+				// !blocked_from_above_right_down &&
+				// !blocked_from_above_left_down &&
 				mouse_rect.has_intersection(block.hitbox)
 			) {
 				highlighted_block = &block;
+			}
+
+			if (	highlighted_block &&
+				highlighted_block->blocked_from_above
+			) {
+				highlighted_block = nullptr;
 			}
 
 			if (	highlighted_block &&
