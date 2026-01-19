@@ -103,16 +103,19 @@ public:
 				.h = hitbox_size
 			};
 
-			Block block {
+			const Block block {
 				.dstrect = dstrect,
 				.hitbox = hitbox,
 				.srcrect = srcrect,
-				.tex_id = tex_id
+				.active =
+					layer >= num_visible_layers ?
+					false : true,
+				.tex_id = tex_id,
+				.shading = {},
+				.layer = layer,
+				.row = row,
+				.col = col
 			};
-
-			block.layer = layer;
-			block.row = row;
-			block.col = col;
 
 			blocks.push_back(block);
 		}
@@ -120,7 +123,7 @@ public:
 	const vector<Block> &get_blocks() const {
 		return blocks;
 	}
-	void update(Point mouse, bool left_click, bool right_click) {
+	void update(Point mouse, bool left_click, bool right_click, bool b_key) {
 		FRect mouse_rect {
 			static_cast<float>(mouse.x),
 			static_cast<float>(mouse.y),
@@ -148,14 +151,18 @@ public:
 				blocked(layer, row - 1, col);
 			const bool blocked_from_right_down =
 				blocked(layer, row, col + 1);
-			const bool blocked_from_left_up =
-				blocked(layer, row, col - 1);
+			// const bool blocked_from_left_up =
+			// 	blocked(layer, row, col - 1);
 			const bool blocked_from_left_down =
 				blocked(layer, row + 1, col);
 			const bool blocked_from_above_right_up =
 				blocked(layer + 1, row - 1, col);
 			const bool blocked_from_above_down =
 				blocked(layer + 1, row + 1, col + 1);
+			const bool blocked_from_above_right_down =
+				blocked(layer + 1, row, col + 1);
+			const bool blocked_from_above_left_down =
+				blocked(layer + 1, row + 1, col);
 
 			// Visibility
 
@@ -163,7 +170,9 @@ public:
 				(!blocked_from_above ||
 				 !blocked_from_right_down ||
 				 !blocked_from_left_down ||
-				 !blocked_from_above_down)
+				 !blocked_from_above_down ||
+				 !blocked_from_above_right_down ||
+				 !blocked_from_above_left_down)
 			) {
 				block.visible = true;
 			} else {
@@ -216,11 +225,13 @@ public:
 				);
 			}
 
-			// Highlight, destroy, and select
-
+			// Highlight, destroy, and select, build
+			
 			if (	block.visible &&
 				!blocked_from_above &&
 				!blocked_from_above_down &&
+				!blocked_from_above_right_down &&
+				!blocked_from_above_left_down &&
 				mouse_rect.has_intersection(block.hitbox)
 			) {
 				highlighted_block = &block;
@@ -256,163 +267,16 @@ public:
 				);
 			}
 
+			if (	highlighted_block &&
+				&block == highlighted_block &&
+				b_key &&
+				layer + 1 < num_layers
+			) {
+				blocks.at(index(layer + 1, row, col)).active =
+					true;
+			}
 		}
-
-		// bool block_highlighted {false};
-		// static FRect selected_block {};
-		// size_t layer {0};
-		// for (auto& rows : blocks) {
-			// size_t row {0};
-			// for (auto& cols : rows) {
-				// size_t col {0};
-				// for (auto& block : cols) {
-
-					// block.shading.clear();
-
-					// bool blocked_from_above =
-						// layer + 1 < blocks.size() &&
-						// blocks[layer + 1][row][col].active ?
-						// true : false;
-
-					// bool blocked_from_right =
-						// row - 1 >= 0 &&
-						// row - 1 < rows.size() &&
-						// col + 1 < cols.size() &&
-						// blocks[layer][row - 1][col + 1].active ?
-						// true : false;
-
-					// bool blocked_from_left =
-						// row + 1 < rows.size() &&
-						// col - 1 >= 0 &&
-						// col - 1 < cols.size() &&
-						// blocks[layer][row + 1][col - 1].active ?
-						// true : false;
-
-					// bool blocked_from_right_up =
-						// row - 1 >= 0 &&
-						// row - 1 < rows.size() &&
-						// blocks[layer][row - 1][col].active ?
-						// true : false;
-
-					// bool blocked_from_left_up =
-						// col - 1 >= 0 &&
-						// col - 1 < cols.size() &&
-						// blocks[layer][row][col - 1].active ?
-						// true : false;
-
-					// bool blocked_from_right_down =
-						// col + 1 < cols.size() &&
-						// blocks[layer][row][col + 1].active ?
-						// true : false;
-
-					// bool blocked_from_left_down =
-						// row + 1 < rows.size() &&
-						// blocks[layer][row + 1][col].active ?
-						// true : false;
-
-					// bool blocked_from_above_right_up =
-						// layer + 1 < blocks.size() &&
-						// row - 1 >= 0 &&
-						// row - 1 < rows.size() &&
-						// blocks[layer + 1][row - 1][col].active ?
-						// true : false;
-
-					// // bool blocked_from_above_down =
-					// // 	layer + 1 < blocks.size() &&
-					// // 	row + 1 < rows.size() &&
-					// // 	col + 1 < cols.size() &&
-					// // 	blocks[layer + 1][row + 1][col + 1].active ?
-
-					// block.visible =
-						// block.active &&
-						// (!blocked_from_left_down ||
-						 // !blocked_from_above ||
-						 // !blocked_from_right_down) ?
-						// true : false;
-
-					// if (	block.highlighted &&
-						// left_click
-					// ) {
-						// selected_block = block.hitbox;
-					// }
-
-					// if (	block.hitbox == selected_block) {
-						// block.shading.push_back(
-							// get_shading(selected_index)
-						// );
-					// }
-
-					// if (	block.highlighted &&
-						// right_click
-					// ) {
-						// block.active = false;
-					// }
-
-					// if (	block.visible &&
-						// blocked_from_left
-					// ) {
-						// block.shading.push_back(
-							// get_shading(left_shadow_index)
-						// );
-					// }
-
-					// if (	block.visible &&
-						// !blocked_from_right &&
-						// !blocked_from_right_down &&
-						// !blocked_from_right_up
-					// ) {
-						// block.shading.push_back(
-							// get_shading(right_light_index)
-						// );
-					// }
-
-					// if (	block.visible &&
-						// !blocked_from_right_down &&
-						// !blocked_from_left_down
-					// ) {
-						// block.shading.push_back(
-							// get_shading(front_corner_index)
-						// );
-					// }
-
-					// if (	block.visible &&
-						// blocked_from_right
-					// ) {
-						// block.shading.push_back(
-							// get_shading(right_shadow_index)
-						// );
-					// }
-
-					// if (	block.visible &&
-						// blocked_from_above_right_up
-					// ) {
-						// block.shading.push_back(
-							// get_shading(top_shadow_index)
-						// );
-					// }
-
-					// if (mouse_rect.has_intersection(block.hitbox) &&
-					    // !blocked_from_above &&
-					    // block.visible &&
-					    // !block_highlighted
-					// ) {
-					    // block_highlighted = true;
-					    // block.highlighted = true;
-					    // block.shading.push_back(
-						// get_shading(highlighted_index)
-					    // );
-					// } else {
-					    // block.highlighted = false;
-					// }
-
-					// col++;
-				// }
-				// row++;
-			// }
-			// layer++;
-		// }
 	}
-
 };
 
 // }

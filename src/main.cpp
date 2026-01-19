@@ -3,13 +3,24 @@ import game;
 
 int main(void) {
 
+	using std::size_t;
+
 	constexpr int win_w = 800;
 	constexpr int win_h = 600;
 	constexpr float block_size = 128;
-
-	try {
+	constexpr size_t num_layers = 2;
+	constexpr size_t num_visible_layers = 1;
+	constexpr size_t num_rows = 3;
+	constexpr size_t num_cols = 3;
+	constexpr float dwarf_size = 64;
+	constexpr float z_offset = block_size / 2;
+	constexpr float origin_x = win_w / 2 - block_size / 2;
+	constexpr float origin_y = win_h / 3;
+	constexpr float origin_z = 0;
 
 	using namespace game;
+
+	try {
 
 	Game game(
 		GameInitData {
@@ -33,15 +44,27 @@ int main(void) {
 			.block_size = block_size,
 			.img_size = 32,
 			.hitbox_size = block_size / 2 - 1,
-			.origin_x = win_w / 2 - block_size / 2,
-			.origin_y = win_h / 3,
-			.origin_z = 0,
+			.origin_x = origin_x,
+			.origin_y = origin_y,
+			.origin_z = origin_z,
 			.x_offset = block_size / 2,
 			.y_offset = block_size / 4,
-			.z_offset = block_size / 2,
-			.num_layers = 2,
-			.num_rows = 2,
-			.num_cols = 2
+			.z_offset = z_offset,
+			.num_layers = num_layers,
+			.num_rows = num_rows,
+			.num_cols = num_cols,
+			.num_visible_layers = num_visible_layers
+		},
+		EntityInitData {
+			.path_to_bmp = "../assets/dwarf10.bmp",
+			.sprite_size = dwarf_size,
+			.img_size = 16,
+			.start_layer = num_visible_layers,
+			.start_row = num_rows / 2,
+			.start_col = num_cols / 2,
+			.ticks_per_img_update = 100,
+			.pixels_per_frame = 10,
+			.num_imgs = 8
 		}
 	);
 

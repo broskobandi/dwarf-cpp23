@@ -37,6 +37,19 @@ export struct BlocksInitData {
 	size_t num_layers;
 	size_t num_rows;
 	size_t num_cols;
+	size_t num_visible_layers;
+};
+
+export struct EntityInitData {
+	std::filesystem::path path_to_bmp;
+	float sprite_size;
+	uint32_t img_size;
+	size_t start_layer;
+	size_t start_row;
+	size_t start_col;
+	uint32_t ticks_per_img_update;
+	float pixels_per_frame;
+	size_t num_imgs;
 };
 
 }
