@@ -40,8 +40,8 @@ int main(void) {
 			.y_offset = block_size / 4,
 			.z_offset = block_size / 2,
 			.num_layers = 2,
-			.num_rows = 4,
-			.num_cols = 4
+			.num_rows = 2,
+			.num_cols = 2
 		}
 	);
 

@@ -14,9 +14,11 @@ export struct Block {
 	Rect srcrect;
 	bool active {true};
 	bool visible {true};
-	bool highlighted {false};
 	size_t tex_id;
 	vector<Rect> shading;
+	size_t layer;
+	size_t row;
+	size_t col;
 };
 
 export class Ground : game::BlocksInitData {
@@ -24,8 +26,10 @@ export class Ground : game::BlocksInitData {
 private:
 
 	vector<Block> blocks;
+	const size_t num_blocks_per_layer;
+	const size_t num_blocks;
 
-	Rect get_shading(size_t shade_index) const {
+	Rect shading(size_t shade_index) const {
 		return Rect{
 			.x = static_cast<int32_t>(shade_index) *
 				static_cast<int32_t>(img_size),
@@ -35,26 +39,47 @@ private:
 		};
 	}
 
+	size_t index(size_t layer, size_t row, size_t col) const {
+		if (	layer >= num_layers ||
+			row >= num_rows ||
+			col >= num_cols
+		) {
+			return (size_t)-1;
+		}
+
+		return
+			layer * num_blocks_per_layer +
+			row * num_cols +
+			col;
+	}
+
+	bool blocked(size_t layer, size_t row, size_t col) {
+		size_t i = index(layer, row, col);
+
+		return
+			i != -1lu &&
+			blocks[i].active;
+	}
+
 public:
 
 	Ground(game::BlocksInitData init_data, size_t tex_id) :
-		game::BlocksInitData(init_data)
+		game::BlocksInitData(init_data),
+		num_blocks_per_layer(num_rows * num_cols),
+		num_blocks(num_layers * num_blocks_per_layer)
 	{
-		size_t num_blocks_per_layer = num_rows * num_cols;
-		size_t num_blocks = num_layers * num_blocks_per_layer;
-
 		for (size_t i = 0; i < num_blocks; i++) {
-			size_t layer = i / num_blocks_per_layer;
-			size_t row =
+			const size_t layer = i / num_blocks_per_layer;
+			const  size_t row =
 				(i - layer * num_blocks_per_layer) / num_cols;
-			size_t col = i - layer * num_blocks_per_layer - 
+			const size_t col = i - layer * num_blocks_per_layer - 
 				row * num_cols;
 
-			float flayer = static_cast<float>(layer);
-			float frow = static_cast<float>(row);
-			float fcol = static_cast<float>(col);
+			const float flayer = static_cast<float>(layer);
+			const float frow = static_cast<float>(row);
+			const float fcol = static_cast<float>(col);
 
-			FRect dstrect {
+			const FRect dstrect {
 				.x = origin_x + fcol * x_offset -
 					frow * x_offset,
 				.y = origin_y + frow * y_offset +
@@ -64,14 +89,14 @@ public:
 				.h = block_size
 			};
 
-			Rect srcrect {
+			const Rect srcrect {
 				.x = 0,
 				.y = 0,
 				.w = img_size,
 				.h = img_size
 			};
 
-			FRect hitbox {
+			const FRect hitbox {
 				.x = dstrect.x + (block_size - hitbox_size) / 2,
 				.y = dstrect.y + 1,
 				.w = hitbox_size,
@@ -85,6 +110,10 @@ public:
 				.tex_id = tex_id
 			};
 
+			block.layer = layer;
+			block.row = row;
+			block.col = col;
+
 			blocks.push_back(block);
 		}
 	}
@@ -97,6 +126,138 @@ public:
 			static_cast<float>(mouse.y),
 			1, 1
 		};
+
+		static Block* highlighted_block {nullptr};
+		static Block* selected_block {nullptr};
+
+		for (auto& block : blocks) {
+			
+			block.shading.clear();
+
+			const size_t layer = block.layer;
+			const size_t row = block.row;
+			const size_t col = block.col;
+
+			const bool blocked_from_above = 
+				blocked(layer + 1, row, col);
+			const bool blocked_from_right =
+				blocked(layer, row - 1, col + 1);
+			const bool blocked_from_left =
+				blocked(layer, row + 1, col - 1);
+			const bool blocked_from_right_up =
+				blocked(layer, row - 1, col);
+			const bool blocked_from_right_down =
+				blocked(layer, row, col + 1);
+			const bool blocked_from_left_up =
+				blocked(layer, row, col - 1);
+			const bool blocked_from_left_down =
+				blocked(layer, row + 1, col);
+			const bool blocked_from_above_right_up =
+				blocked(layer + 1, row - 1, col);
+			const bool blocked_from_above_down =
+				blocked(layer + 1, row + 1, col + 1);
+
+			// Visibility
+
+			if (	block.active &&
+				(!blocked_from_above ||
+				 !blocked_from_right_down ||
+				 !blocked_from_left_down ||
+				 !blocked_from_above_down)
+			) {
+				block.visible = true;
+			} else {
+				block.visible = false;
+			}
+
+			// Shading
+			
+			if (	block.visible &&
+				blocked_from_right &&
+				!blocked_from_right_down
+			) {
+				block.shading.push_back(
+					shading(right_shadow_index)
+				);
+			}
+
+			if (	block.visible &&
+				blocked_from_left &&
+				!blocked_from_left_down
+			) {
+				block.shading.push_back(
+					shading(left_shadow_index)
+				);
+			}
+
+			if (	block.visible &&
+				!blocked_from_right_down &&
+				!blocked_from_left_down
+			) {
+				block.shading.push_back(
+					shading(front_corner_index)
+				);
+			}
+
+			if (	block.visible &&
+				!blocked_from_right &&
+				!blocked_from_right_up
+			) {
+				block.shading.push_back(
+					shading(right_light_index)
+				);
+			}
+
+			if (	block.visible &&
+				blocked_from_above_right_up
+			) {
+				block.shading.push_back(
+					shading(top_shadow_index)
+				);
+			}
+
+			// Highlight, destroy, and select
+
+			if (	block.visible &&
+				!blocked_from_above &&
+				!blocked_from_above_down &&
+				mouse_rect.has_intersection(block.hitbox)
+			) {
+				highlighted_block = &block;
+			}
+
+			if (	highlighted_block &&
+				&block == highlighted_block
+			) {
+				block.shading.push_back(
+					shading(highlighted_index)
+				);
+			}
+
+			if (	highlighted_block &&
+				&block == highlighted_block &&
+				right_click
+			) {
+				block.active = false;
+			}
+
+			if (	highlighted_block &&
+				&block == highlighted_block &&
+				left_click
+			) {
+				selected_block = &block;
+			}
+
+			if (	selected_block &&
+				&block == selected_block
+			) {
+				block.shading.push_back(
+					shading(selected_index)
+				);
+			}
+
+		}
+
 		// bool block_highlighted {false};
 		// static FRect selected_block {};
 		// size_t layer {0};

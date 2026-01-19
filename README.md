@@ -3,7 +3,7 @@
 ### The goal of the project is to provide a demo of a custom game engine using SDL2 and modular C++23 that showcases a dynamic fake-3D tile system, simulation based character development, and a custom path finding algorhythm.
 ## Todo:
 - [x] Get rid of the nested loops (put the whole tile system in a single vector)
-- [ ] Add dynamic shading
+- [x] Add dynamic shading
 - [ ] Add animated dwarf
 - [ ] Add layer awareness to dwarf (fall until ground is found)
 - [ ] Add point and click movement to dwarf

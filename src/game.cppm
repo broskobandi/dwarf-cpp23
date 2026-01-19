@@ -28,6 +28,13 @@ void render_content() const {
 			block.srcrect,
 			block.dstrect
 		);
+		for (const auto& srcrect : block.shading) {
+			sdl.copy_f(
+				block.tex_id,
+				srcrect,
+				block.dstrect
+			);
+		}
 	}
 	// for (const auto& row : blocks) {
 	// 	for (const auto& col : row) {
