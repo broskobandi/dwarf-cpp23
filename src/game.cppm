@@ -21,27 +21,34 @@ Ground ground;
 BlocksInitData blocks_init_data; // this is needed for the img indices
 
 void render_content() const {
-	auto blocks = ground.get_blocks();
-	for (const auto& row : blocks) {
-		for (const auto& col : row) {
-			for (const auto& block : col) {
-				if (!block.visible) continue;
-				sdl.copy_f(
-					block.tex_id,
-					block.srcrect,
-					block.dstrect
-				);
-
-				for (const auto& srcrect : block.shading) {
-					sdl.copy_f(
-						block.tex_id,
-						srcrect,
-						block.dstrect
-					);
-				}
-			}
-		}
+	for (const auto& block : ground.get_blocks()) {
+		if (!block.visible) continue;
+		sdl.copy_f(
+			block.tex_id,
+			block.srcrect,
+			block.dstrect
+		);
 	}
+	// for (const auto& row : blocks) {
+	// 	for (const auto& col : row) {
+	// 		for (const auto& block : col) {
+	// 			if (!block.visible) continue;
+	// 			sdl.copy_f(
+	// 				block.tex_id,
+	// 				block.srcrect,
+	// 				block.dstrect
+	// 			);
+
+	// 			for (const auto& srcrect : block.shading) {
+	// 				sdl.copy_f(
+	// 					block.tex_id,
+	// 					srcrect,
+	// 					block.dstrect
+	// 				);
+	// 			}
+	// 		}
+	// 	}
+	// }
 }
 
 public:

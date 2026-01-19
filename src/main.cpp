@@ -39,9 +39,9 @@ int main(void) {
 			.x_offset = block_size / 2,
 			.y_offset = block_size / 4,
 			.z_offset = block_size / 2,
-			.num_layers = 4,
-			.num_rows = 6,
-			.num_cols = 6
+			.num_layers = 2,
+			.num_rows = 4,
+			.num_cols = 4
 		}
 	);
 
