@@ -1,6 +1,11 @@
 # dwarf-cpp23
 ## A simulation based game about a dwarven brewery written in C++23.
-### The goal of the project is to provide a demo of a custom game engine using SDL2 and modular C++23 that showcases a dynamic fake-3D tile system, simulation based character development, and a custom path finding algorhythm.
+### The goal of the project is to provide a demo of a custom game engine using SDL2 and modular C++23 that showcases a dynamic fake-3D tile system, simulation based character development, and a custom path finding algorithm.
+## Latest update 20/01/26
+Blocks can now be selected, built and destroyed with some "dynamic" shadows.
+The dwarfs spawn on random tiles. The renderer is spatially aware so dwarves can be 
+blocked out by blocks, they aren't just being rendered in the foreground.
+![blocks](gifs/blocks.gif)
 ## Todo:
 - [x] Get rid of the nested loops (put the whole tile system in a single vector)
 - [x] Add dynamic shading
