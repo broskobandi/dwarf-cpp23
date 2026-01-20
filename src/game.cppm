@@ -3,7 +3,7 @@ export module game;
 import std;
 import sdl;
 import ground;
-import entity;
+import entities;
 export import init;
 
 namespace game {
@@ -18,23 +18,19 @@ export class Game {
 private:
 	Sdl sdl;
 	Ground ground;
-	Entity entity;
+	Entities entities;
 
 	void render_content() const {
-		auto render_data = entity.render_data();
-		bool entity_rendered = false;
 
 		for (const auto& block : ground.get_blocks()) {
-			if (	render_data.layer == block.layer &&
-				render_data.row == block.row &&
-				render_data.col == block.col
-			) {
-				sdl.copy_f(
-					render_data.tex_id,
-					render_data.srcrect,
-					render_data.dstrect
-				);
-				entity_rendered = true;
+			for (const auto& entity : entities.get_entities()) {
+				if (entity.location == block.location) {
+					sdl.copy_f(
+						entity.tex_id,
+						entity.srcrect,
+						entity.dstrect
+					);
+				}
 			}
 			if (!block.visible) continue;
 			sdl.copy_f(
@@ -50,20 +46,13 @@ private:
 				);
 			}
 		}
-		if (!entity_rendered) {
-			sdl.copy_f(
-				render_data.tex_id,
-				render_data.srcrect,
-				render_data.dstrect
-			);
-		}
 	}
 
 public:
 	Game(
 		GameInitData&& game_init_data,
 		BlocksInitData&& blocks_init_data,
-		EntityInitData&& entity_init_data
+		EntitiesInitData&& entities_init_data
 	) :
 		sdl(
 			game_init_data.title,
@@ -78,9 +67,10 @@ public:
 			blocks_init_data,
 			sdl.texture(blocks_init_data.path_to_bmp)
 		),
-		entity(
-			entity_init_data,
-			sdl.texture(entity_init_data.path_to_bmp)
+		entities(
+			entities_init_data,
+			sdl.texture(entities_init_data.path_to_bmp),
+			ground.get_blocks()
 		)
 	{}
 
@@ -130,10 +120,10 @@ public:
 				left_click, right_click, b_key
 			);
 
-			entity.update(
-				ground.get_blocks(),
-				sdl.ticks()
-			);
+			// entity.update(
+			// 	ground.get_blocks(),
+			// 	sdl.ticks()
+			// );
 
 			sdl.clear();
 			

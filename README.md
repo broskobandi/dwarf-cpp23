@@ -5,7 +5,7 @@
 - [x] Get rid of the nested loops (put the whole tile system in a single vector)
 - [x] Add dynamic shading
 - [x] Fix selection logic to only apply to visible tiles
-- [x] Add animated dwarf
+- [ ] Add animated dwarf
 - [ ] Add layer awareness to dwarf (fall until ground is found)
 - [ ] Add point and click movement to dwarf
 - [ ] Add tile awareness to dwarf (go around inactive tiles)
@@ -23,4 +23,6 @@
 - [ ] Add dwarf needs (sleeping, eating, drinking, recreation, socialisation, etc...)
 - [ ] Add hostile mechanics (orcs attack, elf steal recipes, flood, ...)
 - [ ] Add proceduraly generated environmental elements
+- [ ] Add sounds
 - [ ] Add goal (some achievement based final reward then sandbox?)
+- [ ] Add music

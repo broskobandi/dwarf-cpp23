@@ -8,18 +8,42 @@ using std::vector;
 using std::size_t;
 using std::int32_t;
 
+export struct Location {
+	size_t layer;
+	size_t row;
+	size_t col;
+
+	bool operator==(const Location& other) const {
+		return	layer == other.layer &&
+			row == other.row &&
+			col == other.col;
+	}
+
+	bool has_equal_in(const vector<Location>& locations) const {
+		for (const auto& location : locations) {
+			if (location == *this) {
+				return true;
+			}
+		}
+		return false;
+	}
+};
+
 export struct Block {
-	FRect dstrect;
-	FRect hitbox;
+	const FRect dstrect;
+	const FRect hitbox;
 	Rect srcrect;
 	bool active {true};
 	bool visible {true};
 	bool blocked_from_above {false};
-	size_t tex_id;
+	bool selected {false};
+	const size_t tex_id;
 	vector<Rect> shading;
-	size_t layer;
-	size_t row;
-	size_t col;
+	const Location location;
+	// const size_t layer;
+	// const size_t row;
+	// const size_t col;
+	float z;
 };
 
 export class Ground : game::BlocksInitData {
@@ -113,9 +137,12 @@ public:
 					false : true,
 				.tex_id = tex_id,
 				.shading = {},
-				.layer = layer,
-				.row = row,
-				.col = col
+				.location {
+					.layer = layer,
+					.row = row,
+					.col = col
+				},
+				.z = origin_z - layer * z_offset
 			};
 
 			blocks.push_back(block);
@@ -138,9 +165,9 @@ public:
 			
 			block.shading.clear();
 
-			const size_t layer = block.layer;
-			const size_t row = block.row;
-			const size_t col = block.col;
+			const size_t layer = block.location.layer;
+			const size_t row = block.location.row;
+			const size_t col = block.location.col;
 
 			const bool blocked_from_above = 
 				blocked(layer + 1, row, col);
@@ -275,6 +302,18 @@ public:
 				left_click
 			) {
 				selected_block = &block;
+			}
+
+			if (	selected_block &&
+				&block == selected_block
+			) {
+				block.selected = true;
+			}
+
+			if (	!selected_block &&
+				block.selected
+			) {
+				block.selected = false;
 			}
 
 			if (	selected_block &&

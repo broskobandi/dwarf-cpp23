@@ -8,8 +8,8 @@ int main(void) {
 	constexpr int win_w = 800;
 	constexpr int win_h = 600;
 	constexpr float block_size = 128;
-	constexpr size_t num_layers = 2;
-	constexpr size_t num_visible_layers = 1;
+	constexpr size_t num_layers = 3;
+	constexpr size_t num_visible_layers = 2;
 	constexpr size_t num_rows = 3;
 	constexpr size_t num_cols = 3;
 	constexpr float dwarf_size = 64;
@@ -55,13 +55,15 @@ int main(void) {
 			.num_cols = num_cols,
 			.num_visible_layers = num_visible_layers
 		},
-		EntityInitData {
+		EntitiesInitData {
 			.path_to_bmp = "../assets/dwarf10.bmp",
-			.sprite_size = dwarf_size,
+			.entity_size = dwarf_size,
 			.img_size = 16,
-			.start_layer = num_visible_layers,
-			.start_row = num_rows / 2,
-			.start_col = num_cols / 2,
+			.num_entities = 3,
+			.spawn_layer = num_visible_layers,
+			.spawn_row = 0,
+			.spawn_col = 0,
+			.spawn_area = 3,
 			.ticks_per_img_update = 100,
 			.pixels_per_frame = 10,
 			.num_imgs = 8
