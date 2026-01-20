@@ -59,7 +59,7 @@ int main(void) {
 			.path_to_bmp = "../assets/dwarf10.bmp",
 			.entity_size = dwarf_size,
 			.img_size = 16,
-			.num_entities = 3,
+			.num_entities = 1,
 			.spawn_layer = num_visible_layers,
 			.spawn_row = 0,
 			.spawn_col = 0,

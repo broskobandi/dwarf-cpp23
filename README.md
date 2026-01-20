@@ -10,9 +10,10 @@ blocked out by blocks, they aren't just being rendered in the foreground.
 - [x] Get rid of the nested loops (put the whole tile system in a single vector)
 - [x] Add dynamic shading
 - [x] Fix selection logic to only apply to visible tiles
+- [ ] Add shadow at the bottom of the blocks
 - [ ] Add animated dwarf
-- [ ] Add layer awareness to dwarf (fall until ground is found)
-- [ ] Add point and click movement to dwarf
+- [ ] Add layer awareness to dwarf
+- [x] Add point and click movement to dwarf
 - [ ] Add tile awareness to dwarf (go around inactive tiles)
 - [ ] Add interlayer travel capabilities (ladder building task?)
 - [ ] Add digging task

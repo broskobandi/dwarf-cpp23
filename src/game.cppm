@@ -120,10 +120,9 @@ public:
 				left_click, right_click, b_key
 			);
 
-			// entity.update(
-			// 	ground.get_blocks(),
-			// 	sdl.ticks()
-			// );
+			entities.update(
+				ground.get_blocks()
+			);
 
 			sdl.clear();
 			

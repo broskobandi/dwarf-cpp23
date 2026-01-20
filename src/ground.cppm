@@ -40,9 +40,7 @@ export struct Block {
 	const size_t tex_id;
 	vector<Rect> shading;
 	const Location location;
-	// const size_t layer;
-	// const size_t row;
-	// const size_t col;
+	bool has_task {false};
 	float z;
 };
 
@@ -192,6 +190,8 @@ public:
 			const bool blocked_from_above_left_down =
 				blocked(layer + 1, row + 1, col);
 
+			block.has_task = false;
+
 			// Visibility
 
 			block.visible =
@@ -319,6 +319,7 @@ public:
 			if (	selected_block &&
 				&block == selected_block
 			) {
+				block.has_task = true;
 				block.shading.push_back(
 					shading(selected_index)
 				);
@@ -335,5 +336,3 @@ public:
 		}
 	}
 };
-
-// }
