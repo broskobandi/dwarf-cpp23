@@ -16,6 +16,7 @@ public:
 	Rect srcrect;
 	size_t tex_id;
 	Location location;
+	bool flip {false};
 private:
 	friend class Entities;
 
@@ -103,11 +104,6 @@ public:
 			float target_x {};
 			float target_y {};
 
-			std::println("{} {} {}",
-				entity.location.layer,
-				entity.location.row,
-				entity.location.col
-			);
 
 			for (const auto& block : blocks) {
 				if (block.has_task) {
@@ -128,7 +124,7 @@ public:
 						target_y
 					) {
 						entity.location = block.location;
-						// this is necessary because 
+						// this is necessary because
 						// the selected tile is always
 						// a layer below
 						entity.location.layer++;
@@ -138,6 +134,7 @@ public:
 			}
 
 			if (has_task) {
+
 				if (	entity.dstrect.x >
 					target_x + pixels_per_frame
 				) {

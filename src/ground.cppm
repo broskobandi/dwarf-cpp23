@@ -146,7 +146,7 @@ public:
 			blocks.push_back(block);
 		}
 	}
-	const vector<Block> &get_blocks() const {
+	const vector<Block>& get_blocks() const {
 		return blocks;
 	}
 	void update(Point mouse, bool left_click, bool right_click, bool b_key) {

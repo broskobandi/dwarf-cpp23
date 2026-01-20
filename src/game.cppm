@@ -25,10 +25,11 @@ private:
 		for (const auto& block : ground.get_blocks()) {
 			for (const auto& entity : entities.get_entities()) {
 				if (entity.location == block.location) {
-					sdl.copy_f(
+					sdl.copy_ex_f(
 						entity.tex_id,
 						entity.srcrect,
-						entity.dstrect
+						entity.dstrect,
+						entity.flip
 					);
 				}
 			}

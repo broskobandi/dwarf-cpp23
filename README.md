@@ -6,18 +6,22 @@ Blocks can now be selected, built and destroyed with some "dynamic" shadows.
 The dwarfs spawn on random tiles. The renderer is spatially aware so dwarves can be 
 blocked out by blocks, they aren't just being rendered in the foreground.
 ![blocks](gifs/blocks.gif)
-## Todo:
+## Roadmap:
 - [x] Get rid of the nested loops (put the whole tile system in a single vector)
 - [x] Add dynamic shading
 - [x] Fix selection logic to only apply to visible tiles
-- [ ] Add shadow at the bottom of the blocks
-- [ ] Add animated dwarf
-- [ ] Add layer awareness to dwarf
+- [ ] Add the first task (go to tile)
+- [ ] Add shadow at the bottom of blocks
+- [ ] Add animation to dwarf
+- [x] Add layer awareness to dwarf
 - [x] Add point and click movement to dwarf
 - [ ] Add tile awareness to dwarf (go around inactive tiles)
 - [ ] Add interlayer travel capabilities (ladder building task?)
 - [ ] Add digging task
 - [ ] Add underground visibility system (manual)
+- [ ] Add harvesting task
+- [ ] Add building task
+- [ ] Add brewing task
 - [ ] Add camera motion
 - [ ] Add "follow dwarf" feature to camera
 - [ ] Add underground visibility system (automatic)

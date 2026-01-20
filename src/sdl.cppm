@@ -544,6 +544,30 @@ public:
 			"Failed to render texture."
 		);
 	}
+	void copy_ex_f(
+		size_t tex_id,
+		const Rect& src,
+		const FRect &dst,
+		bool flip
+	) const	{
+		if (tex_id >= textures.size()) throw runtime_error(
+			"Tex_id is out of bounds."
+		);
+		SDL_Rect srcrect = src.to_sdl();
+		SDL_FRect dstrect = dst.to_sdl();
+		if (SDL_RenderCopyExF(
+			ren,
+			textures.at(tex_id),
+			&srcrect,
+			&dstrect,
+			0.0f,
+			nullptr,
+			flip ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE)
+		) throw runtime_error(
+			"Failed to render texture."
+		);
+			
+	}
 	Point get_mouse_pos() const {
 		int x, y;
 		SDL_GetMouseState(&x, &y);
