@@ -2,6 +2,10 @@
 ## A simulation based game about a dwarven brewery written in C++23.
 ### The goal of the project is to provide a demo of a custom game engine using SDL2 and modular C++23 that showcases a dynamic fake-3D tile system, simulation based character development, and a custom path finding algorithm.
 ## Latest update 20/01/26
+Point and click added! Can even send the dwarf down to other layers. The sprite 
+still needs to be animated, but that's for another update.
+![point_click](gifs/point_click.gif)
+## Latest update 20/01/26
 Blocks can now be selected, built and destroyed with some "dynamic" shadows.
 The dwarfs spawn on random tiles. The renderer is spatially aware so dwarves can be 
 blocked out by blocks, they aren't just being rendered in the foreground.
@@ -16,7 +20,7 @@ blocked out by blocks, they aren't just being rendered in the foreground.
 - [x] Add layer awareness to dwarf
 - [x] Add point and click movement to dwarf
 - [ ] Add tile awareness to dwarf (go around inactive tiles)
-- [ ] Add interlayer travel capabilities (ladder building task?)
+- [ ] Add more sophisticated interlayer travel capabilities (ladder building task?)
 - [ ] Add digging task
 - [ ] Add underground visibility system (manual)
 - [ ] Add harvesting task
