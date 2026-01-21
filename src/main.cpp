@@ -22,64 +22,62 @@ int main(void) {
 
 	try {
 
-	Game game(
-		GameInitData {
-			.title = "Dwarf",
-			.win_w = win_w,
-			.win_h = win_h,
-			.vsync = true,
-			.bg_r = 30,
-			.bg_g = 75,
-			.bg_b = 75
-		},
-		BlocksInitData {
-			.path_to_bmp = "../assets/ground4.bmp",
-			.left_shadow_index = 4,
-			.right_shadow_index = 1,
-			.right_light_index = 2,
-			.top_shadow_index = 5,
-			.front_corner_index = 3,
-			.selected_index = 7,
-			.highlighted_index = 6,
-			.block_size = block_size,
-			.img_size = 32,
-			.hitbox_size = block_size / 2 - 1,
-			.origin_x = origin_x,
-			.origin_y = origin_y,
-			.origin_z = origin_z,
-			.x_offset = block_size / 2,
-			.y_offset = block_size / 4,
-			.z_offset = z_offset,
-			.num_layers = num_layers,
-			.num_rows = num_rows,
-			.num_cols = num_cols,
-			.num_visible_layers = num_visible_layers
-		},
-		EntitiesInitData {
-			.path_to_bmp = "../assets/dwarf10.bmp",
-			.entity_size = dwarf_size,
-			.img_size = 16,
-			.num_entities = 1,
-			.spawn_layer = num_visible_layers,
-			.spawn_row = 0,
-			.spawn_col = 0,
-			.spawn_area = 3,
-			.ticks_per_img_update = 100,
-			.pixels_per_frame = 10,
-			.num_imgs = 8
-		},
-		TasksInitData {
-			.path_to_bmp = "../assets/task.bmp",
-			.highlighted_index = 1,
-			.selected_index = 0,
-			.img_size = 32
-		}
-	);
-
-	game.run();
+		run(
+			GameConfig {
+				.title = "Dwarf",
+				.win_w = win_w,
+				.win_h = win_h,
+				.has_vsync = true,
+				.bg_r = 30,
+				.bg_g = 75,
+				.bg_b = 75
+			},
+			GroundConfig {
+				.path_to_bmp = "../assets/ground4.bmp",
+				.left_shadow_index = 4,
+				.right_shadow_index = 1,
+				.right_light_index = 2,
+				.top_shadow_index = 5,
+				.front_corner_index = 3,
+				.block_size = block_size,
+				.img_size = 32,
+				.origin_x = origin_x,
+				.origin_y = origin_y,
+				.origin_z = origin_z,
+				.x_offset = block_size / 2,
+				.y_offset = block_size / 4,
+				.z_offset = z_offset,
+				.num_layers = num_layers,
+				.num_rows = num_rows,
+				.num_cols = num_cols,
+				.num_visible_layers = num_visible_layers
+			},
+			TasksConfig {
+				.path_to_bmp = "../assets/task.bmp",
+				.highlighted_index = 1,
+				.selected_index = 0,
+				.img_size = 32,
+				.hitbox_size = block_size / 2 - 1
+			},
+			EntitiesConfig {
+				.path_to_bmp = "../assets/dwarf10.bmp",
+				.entity_size = dwarf_size,
+				.img_size = 16,
+				.num_entities = 1,
+				.spawn_layer = num_visible_layers,
+				.spawn_row = 0,
+				.spawn_col = 0,
+				.spawn_area = 3,
+				.ticks_per_img_update = 100,
+				.pixels_per_frame = 10,
+				.num_imgs = 8
+			}
+		);
 
 	} catch (const std::runtime_error& e) {
+
 		std::println(std::cerr, "{}", e.what());
+
 	}
 
 	return 0;

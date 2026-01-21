@@ -2,52 +2,76 @@ export module tasks;
 
 import sdl;
 import std;
-import init;
-import ground;
+import config;
+import products;
 
 using std::vector;
 using std::size_t;
 using std::uint32_t;
 
-export struct Task {
-	enum Type {
-		NONE,
-		STAND
-	};
-	Location location;
-	FRect dstrect;
-	Rect srcrect;
-	size_t tex_id;
-	uint32_t ticks_to_complete {0};
-	Type type {NONE};
-	uint32_t start_time {0};
-	bool done {true};
-};
-
-export class Tasks : private game::TasksInitData {
+export class Tasks : private game::TasksConfig {
 private:
-	vector<Task> tasks;
+	TasksProduct product;
 public:
 	Tasks(
-		TasksInitData init_data,
+		TasksConfig config,
 		size_t tex_id,
-		const vector<Block>& blocks
+		const GroundProduct& ground_product
 	) :
-		TasksInitData(init_data)
+		TasksConfig(config)
 	{
-		for (const auto& block : blocks) {
-			tasks.push_back({
+		for (const auto& block : ground_product.blocks) {
+			product.tasks.push_back({
 				.location = block.location,
 				.dstrect = block.dstrect,
+				.hitbox {
+					.x = block.dstrect.x +
+						(block.dstrect.w -
+						 hitbox_size) / 2,
+					.y = block.dstrect.y + 1 + 
+						block.dstrect.h / 2,
+					.w = hitbox_size,
+					.h = hitbox_size
+				},
 				.srcrect = {0, 0, img_size, img_size},
 				.tex_id = tex_id
 			});
 		}
 	}
-	const vector<Task>& get_tasks() const {
-		return tasks;
+	void update(
+		const EntitiesProduct& entities_product,
+		const GroundProduct& ground_product,
+		Point mouse_pos,
+		bool is_left_click, bool is_right_click, bool is_b_key
+	) {
+		size_t i = 0;
+		for (auto& task : product.tasks) {
+			task.is_visible = false;
+
+			FPoint fmouse = {
+				static_cast<float>(mouse_pos.x),
+				static_cast<float>(mouse_pos.y)
+			};
+			const auto& block = ground_product.blocks.at(i);
+			if (	block.is_selectable &&
+				mouse_pos.x >= task.hitbox.x &&
+				mouse_pos.x <= task.hitbox.x + task.hitbox.w &&
+				mouse_pos.y >= task.hitbox.y &&
+				mouse_pos.y <= task.hitbox.y + task.hitbox.h
+			) {
+				task.is_visible = true;
+				task.srcrect.x = 1;
+				std::println("{} {} {}",
+					task.location.layer,
+					task.location.row,
+					task.location.col
+				);
+			}
+
+			i++;
+		}
 	}
-	vector<Task>& get_tasks_mut() {
-		return tasks;
+	const TasksProduct& get_product() const {
+		return product;
 	}
 };

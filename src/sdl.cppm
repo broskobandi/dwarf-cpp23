@@ -4,6 +4,7 @@ module;
 #include <SDL2/SDL.h>
 
 export module sdl;
+import config;
 
 import std;
 
@@ -404,7 +405,7 @@ export enum class EventType : std::size_t {
 	LASTEVENT = SDL_LASTEVENT,
 };
 
-export class Sdl {
+export class Sdl : game::GameConfig {
 
 private:
 
@@ -414,34 +415,21 @@ private:
 	SDL_Renderer* ren;
 	SDL_Event event;
 
-	uint8_t bg_r, bg_g, bg_b;
-
 public:
 
 	Sdl(
-		// GameInitData game_init_data
-		std::string title,
-		uint32_t win_w,
-		uint32_t win_h,
-		bool vsync,
-		uint8_t bg_r,
-		uint8_t bg_g,
-		uint8_t bg_b
+		game::GameConfig config
 	) :
-		// GameInitData(game_init_data)
-		bg_r(bg_r),
-		bg_g(bg_g),
-		bg_b(bg_b)
-
+		GameConfig(config)
 	{
-		static bool init {false};
+		static bool is_init {false};
 
-		if (init)
+		if (is_init)
 			throw runtime_error("Sdl cannot be initalized twice.");
 
 		if (SDL_Init(SDL_INIT_EVERYTHING))
 			throw runtime_error("Failed to init SDL.");
-		init = true;
+		is_init = true;
 		dbg("SDL initialized.");
 
 		win = SDL_CreateWindow(
@@ -459,7 +447,7 @@ public:
 		ren = SDL_CreateRenderer(
 			win,
 			-1,
-			vsync ? SDL_RENDERER_PRESENTVSYNC : 0
+			has_vsync ? SDL_RENDERER_PRESENTVSYNC : 0
 		);
 		if (!ren)
 			throw runtime_error("Failed to create renderer.");
@@ -548,7 +536,7 @@ public:
 		size_t tex_id,
 		const Rect& src,
 		const FRect &dst,
-		bool flip
+		bool is_flipped
 	) const	{
 		if (tex_id >= textures.size()) throw runtime_error(
 			"Tex_id is out of bounds."
@@ -562,7 +550,7 @@ public:
 			&dstrect,
 			0.0f,
 			nullptr,
-			flip ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE)
+			is_flipped ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE)
 		) throw runtime_error(
 			"Failed to render texture."
 		);

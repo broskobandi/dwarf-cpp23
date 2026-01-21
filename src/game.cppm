@@ -5,7 +5,8 @@ import sdl;
 import ground;
 import entities;
 import tasks;
-export import init;
+import products;
+export import config;
 
 namespace game {
 
@@ -14,28 +15,27 @@ using std::uint32_t;
 using std::int32_t;
 using std::size_t;
 
-export class Game {
+void render_content(
+	const Sdl& sdl,
+	const GroundProduct& ground,
+	const TasksProduct& tasks,
+	const EntitiesProduct& entites
+) {
 
-private:
-	Sdl sdl;
-	Ground ground;
-	Entities entities;
-	Tasks tasks;
-
-	void render_content() const {
-
-		for (const auto& block : ground.get_blocks()) {
-			for (const auto& entity : entities.get_entities()) {
-				if (entity.location == block.location) {
-					sdl.copy_ex_f(
-						entity.tex_id,
-						entity.srcrect,
-						entity.dstrect,
-						entity.flip
-					);
-				}
-			}
-			if (!block.visible) continue;
+	size_t i = 0;
+	for (const auto& block : ground.blocks) {
+		const Task& task = tasks.tasks.at(i);
+		// for (const auto& entity : entities.get_entities()) {
+		// 	if (entity.location == block.location) {
+		// 		sdl.copy_ex_f(
+		// 			entity.tex_id,
+		// 			entity.srcrect,
+		// 			entity.dstrect,
+		// 			entity.is_flipped
+		// 		);
+		// 	}
+		// }
+		if (block.is_visible) {
 			sdl.copy_f(
 				block.tex_id,
 				block.srcrect,
@@ -49,103 +49,107 @@ private:
 				);
 			}
 		}
+		if (task.is_visible) {
+			sdl.copy_f(
+				task.tex_id,
+				task.srcrect,
+				task.dstrect
+			);
+		}
+		i++;
 	}
+}
 
-public:
-	Game(
-		GameInitData&& game_init_data,
-		BlocksInitData&& blocks_init_data,
-		EntitiesInitData&& entities_init_data,
-		TasksInitData&& tasks_init_data
-	) :
-		sdl(
-			game_init_data.title,
-			game_init_data.win_w,
-			game_init_data.win_h,
-			game_init_data.vsync,
-			game_init_data.bg_r,
-			game_init_data.bg_g,
-			game_init_data.bg_b
-		),
-		ground(
-			blocks_init_data,
-			sdl.texture(blocks_init_data.path_to_bmp)
-		),
-		entities(
-			entities_init_data,
-			sdl.texture(entities_init_data.path_to_bmp),
-			ground.get_blocks()
-		),
-		tasks(
-			tasks_init_data,
-			sdl.texture(tasks_init_data.path_to_bmp),
-			ground.get_blocks()
-		)
-	{}
+export void run(
+	GameConfig&& game_config,
+	GroundConfig&& ground_config,
+	TasksConfig&& tasks_config,
+	EntitiesConfig&& entities_config
+) {
+	static bool has_game_run {false};
 
-	Game(const Game&) = delete;
-	Game(Game&&) = delete;
-	Game& operator=(const Game&) = delete;
-	Game& operator=(Game&&) = delete;
+	if (has_game_run)
+		throw std::runtime_error("Game cannot be run twice.");
 
-	void run() {
-		static bool game_run {false};
+	Sdl sdl(game_config);
 
-		if (game_run)
-			throw std::runtime_error("Game cannot be run twice.");
+	Ground ground(
+		ground_config,
+		sdl.texture(ground_config.path_to_bmp)
+	);
 
-		bool running {true};
+	Tasks tasks(
+		tasks_config,
+		sdl.texture(tasks_config.path_to_bmp),
+		ground.get_product()
+	);
 
-		dbg("Entering main loop...");
+	Entities entities(
+		entities_config,
+		sdl.texture(entities_config.path_to_bmp),
+		ground.get_product()
+	);
 
-		while (running) {
-			bool left_click {false};
-			bool right_click {false};
-			bool b_key {false};
+	bool is_running {true};
 
-			while (sdl.poll_events()) {
-				if (	sdl.has_type(EventType::QUIT) ||
-					(sdl.has_type(EventType::KEYDOWN) &&
-					 sdl.has_key(Key::q))
-				) {
-					running = false;
-				}
+	dbg("Entering main loop...");
 
-				if (sdl.has_type(EventType::KEYDOWN)) {
-					if (sdl.has_key(Key::b)) {
-						b_key = true;
-					}
-				}
-				if (sdl.has_left_button()) {
-					left_click = true;
-				}
-				if (sdl.has_right_button()) {
-					right_click = true;
-				}
+	while (is_running) {
+		bool is_left_click {false};
+		bool is_right_click {false};
+		bool is_b_key {false};
+
+		while (sdl.poll_events()) {
+			if (	sdl.has_type(EventType::QUIT) ||
+				(sdl.has_type(EventType::KEYDOWN) &&
+				 sdl.has_key(Key::q))
+			) {
+				is_running = false;
 			}
 
-			ground.update(
-				sdl.get_mouse_pos(),
-				left_click, right_click, b_key
-			);
-
-			entities.update(
-				ground.get_blocks()
-			);
-
-			sdl.clear();
-			
-			render_content();
-
-			sdl.present();
+			if (sdl.has_type(EventType::KEYDOWN)) {
+				if (sdl.has_key(Key::b)) {
+					is_b_key = true;
+				}
+			}
+			if (sdl.has_left_button()) {
+				is_left_click = true;
+			}
+			if (sdl.has_right_button()) {
+				is_right_click = true;
+			}
 		}
 
-		dbg("Loop finished.");
+		entities.update(
+			tasks.get_product()
+		);
 
-		game_run = true;
+		tasks.update(
+			entities.get_product(),
+			ground.get_product(),
+			sdl.get_mouse_pos(),
+			is_left_click, is_right_click, is_b_key
+		);
+
+		ground.update(
+			tasks.get_product()
+		);
+
+		sdl.clear();
+		
+		render_content(
+			sdl,
+			ground.get_product(),
+			tasks.get_product(),
+			entities.get_product()
+		);
+
+		sdl.present();
 	}
 
-	~Game() = default;
-};
+	dbg("Loop finished.");
+
+	has_game_run = true;
+}
 
 }
