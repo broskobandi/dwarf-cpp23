@@ -80,7 +80,7 @@ private:
 		size_t i = index(layer, row, col);
 
 		return
-			i != -1lu &&
+			i != (size_t)-1 &&
 			blocks[i].active;
 	}
 

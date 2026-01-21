@@ -67,6 +67,12 @@ int main(void) {
 			.ticks_per_img_update = 100,
 			.pixels_per_frame = 10,
 			.num_imgs = 8
+		},
+		TasksInitData {
+			.path_to_bmp = "../assets/task.bmp",
+			.highlighted_index = 1,
+			.selected_index = 0,
+			.img_size = 32
 		}
 	);
 

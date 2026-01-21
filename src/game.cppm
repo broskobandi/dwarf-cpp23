@@ -4,6 +4,7 @@ import std;
 import sdl;
 import ground;
 import entities;
+import tasks;
 export import init;
 
 namespace game {
@@ -19,6 +20,7 @@ private:
 	Sdl sdl;
 	Ground ground;
 	Entities entities;
+	Tasks tasks;
 
 	void render_content() const {
 
@@ -53,7 +55,8 @@ public:
 	Game(
 		GameInitData&& game_init_data,
 		BlocksInitData&& blocks_init_data,
-		EntitiesInitData&& entities_init_data
+		EntitiesInitData&& entities_init_data,
+		TasksInitData&& tasks_init_data
 	) :
 		sdl(
 			game_init_data.title,
@@ -71,6 +74,11 @@ public:
 		entities(
 			entities_init_data,
 			sdl.texture(entities_init_data.path_to_bmp),
+			ground.get_blocks()
+		),
+		tasks(
+			tasks_init_data,
+			sdl.texture(tasks_init_data.path_to_bmp),
 			ground.get_blocks()
 		)
 	{}

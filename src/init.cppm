@@ -54,4 +54,11 @@ export struct EntitiesInitData {
 	const size_t num_imgs;
 };
 
+export struct TasksInitData {
+	const std::filesystem::path path_to_bmp;
+	const size_t highlighted_index;
+	const size_t selected_index;
+	const uint32_t img_size;
+};
+
 }
