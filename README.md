@@ -14,8 +14,9 @@ blocked out by blocks, they aren't just being rendered in the foreground.
 - [x] Get rid of the nested loops (put the whole tile system in a single vector)
 - [x] Add dynamic shading
 - [x] Fix selection logic to only apply to visible tiles
-- [ ] Add the first task (go to tile)
+- [x] Add the first task (go to tile)
 - [ ] Add shadow at the bottom of blocks
+- [ ] Add shadow under the dwarf
 - [ ] Add animation to dwarf
 - [x] Add layer awareness to dwarf
 - [x] Add point and click movement to dwarf

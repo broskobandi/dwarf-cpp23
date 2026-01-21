@@ -53,7 +53,7 @@ export struct Task {
 	uint32_t ticks_to_complete {0};
 	Type type {NONE};
 	uint32_t start_time {0};
-	bool is_done {true};
+	bool is_highlighted {false};
 };
 
 export struct Entity {
@@ -67,7 +67,8 @@ export struct Entity {
 	Rect srcrect;
 	size_t tex_id;
 	Location location;
-	bool flip {false};
+	bool is_flipped {false};
+	State state {IDLE};
 };
 
 export struct GroundProduct {

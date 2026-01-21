@@ -72,80 +72,77 @@ public:
 	}
 
 	void update(const TasksProduct& tasks_product) {
-		// for (auto& entity : entities) {
-			// bool has_task = false;
-			// Location task_location {};
-			// float target_x {};
-			// float target_y {};
+		for (auto& entity : product.entities) {
+			bool has_task = false;
+			Location task_location {};
+			float target_x {};
+			float target_y {};
 
-
-			// for (const auto& block : blocks) {
-				// if (block.has_task) {
-					// has_task = true;
-					// task_location = block.location;
-					// target_x =
-						// block.dstrect.x +
-						// (block.dstrect.w -
-						 // entity_size) / 2;
-					// target_y =
-						// block.dstrect.y +
-						// (block.dstrect.h -
-						 // entity_size) / 2 -
-						// entity.dstrect.h;
-					// if (	entity.dstrect.x ==
-						// target_x &&
-						// entity.dstrect.y ==
-						// target_y
-					// ) {
-						// entity.location = block.location;
-						// // this is necessary because
-						// // the selected tile is always
-						// // a layer below
+			for (const auto& task : tasks_product.tasks) {
+				if (task.type != Task::NONE) {
+					has_task = true;
+					task_location = task.location;
+					target_x =
+						task.dstrect.x +
+						(task.dstrect.w -
+						 entity_size) / 2;
+					target_y =
+						task.dstrect.y +
+						(task.dstrect.h -
+						 entity_size) / 2;
+					if (	entity.dstrect.x ==
+						target_x &&
+						entity.dstrect.y ==
+						target_y
+					) {
+						entity.location = task.location;
 						// entity.location.layer++;
-					// }
-					// break;
-				// }
-			// }
+					}
+					break;
+				}
+			}
 
-			// if (has_task) {
+			if (has_task) {
 
-				// if (	entity.dstrect.x >
-					// target_x + pixels_per_frame
-				// ) {
-					// entity.dstrect.x -= pixels_per_frame;
-				// }
+				if (	entity.dstrect.x >
+					target_x + pixels_per_frame
+				) {
+					entity.dstrect.x -= pixels_per_frame;
+				}
 					
-				// if (	entity.dstrect.x <
-					// target_x - pixels_per_frame
-				// ) {
-					// entity.dstrect.x += pixels_per_frame;
-				// }		
+				if (	entity.dstrect.x <
+					target_x - pixels_per_frame
+				) {
+					entity.dstrect.x += pixels_per_frame;
+				}		
 					
-				// if (	entity.dstrect.y >
-					// target_y + pixels_per_frame
-				// ) {
-					// entity.dstrect.y -= pixels_per_frame;
-				// }
+				if (	entity.dstrect.y >
+					target_y + pixels_per_frame
+				) {
+					entity.dstrect.y -= pixels_per_frame;
+				}
 
-				// if (	entity.dstrect.y <
-					// target_y - pixels_per_frame
-				// ) {
-					// entity.dstrect.y += pixels_per_frame;
-				// }
+				if (	entity.dstrect.y <
+					target_y - pixels_per_frame
+				) {
+					entity.dstrect.y += pixels_per_frame;
+				}
 
-				// if (	std::fabs(entity.dstrect.x - target_x) <
-					// pixels_per_frame
-				// ) {
-					// entity.dstrect.x = target_x;
-				// }
+				if (	std::fabs(entity.dstrect.x - target_x) <
+					pixels_per_frame
+				) {
+					entity.dstrect.x = target_x;
+				}
 
-				// if (	std::fabs(entity.dstrect.y - target_y) <
-					// pixels_per_frame
-				// ) {
-					// entity.dstrect.y = target_y;
-				// }
-			// }
-		// }
+				if (	std::fabs(entity.dstrect.y - target_y) <
+					pixels_per_frame
+				) {
+					entity.dstrect.y = target_y;
+				}
+
+			}
+		}
+
 	}
 
 	const EntitiesProduct& get_product() const {

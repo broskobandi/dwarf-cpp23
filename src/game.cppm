@@ -19,22 +19,22 @@ void render_content(
 	const Sdl& sdl,
 	const GroundProduct& ground,
 	const TasksProduct& tasks,
-	const EntitiesProduct& entites
+	const EntitiesProduct& entities
 ) {
 
 	size_t i = 0;
 	for (const auto& block : ground.blocks) {
 		const Task& task = tasks.tasks.at(i);
-		// for (const auto& entity : entities.get_entities()) {
-		// 	if (entity.location == block.location) {
-		// 		sdl.copy_ex_f(
-		// 			entity.tex_id,
-		// 			entity.srcrect,
-		// 			entity.dstrect,
-		// 			entity.is_flipped
-		// 		);
-		// 	}
-		// }
+		for (const auto& entity : entities.entities) {
+			if (entity.location == block.location) {
+				sdl.copy_ex_f(
+					entity.tex_id,
+					entity.srcrect,
+					entity.dstrect,
+					entity.is_flipped
+				);
+			}
+		}
 		if (block.is_visible) {
 			sdl.copy_f(
 				block.tex_id,

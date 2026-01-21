@@ -8,6 +8,7 @@ import products;
 using std::vector;
 using std::size_t;
 using std::uint32_t;
+using std::int32_t;
 
 export class Tasks : private game::TasksConfig {
 private:
@@ -47,25 +48,47 @@ public:
 		size_t i = 0;
 		for (auto& task : product.tasks) {
 			task.is_visible = false;
+			// task.srcrect.x = 0;
+			task.is_highlighted = false;
 
-			FPoint fmouse = {
+			FPoint fmouse_pos = {
 				static_cast<float>(mouse_pos.x),
 				static_cast<float>(mouse_pos.y)
 			};
 			const auto& block = ground_product.blocks.at(i);
 			if (	block.is_selectable &&
-				mouse_pos.x >= task.hitbox.x &&
-				mouse_pos.x <= task.hitbox.x + task.hitbox.w &&
-				mouse_pos.y >= task.hitbox.y &&
-				mouse_pos.y <= task.hitbox.y + task.hitbox.h
+				fmouse_pos.x >= task.hitbox.x &&
+				fmouse_pos.x <= task.hitbox.x + task.hitbox.w &&
+				fmouse_pos.y >= task.hitbox.y &&
+				fmouse_pos.y <= task.hitbox.y + task.hitbox.h
 			) {
 				task.is_visible = true;
-				task.srcrect.x = 1;
-				std::println("{} {} {}",
-					task.location.layer,
-					task.location.row,
-					task.location.col
-				);
+				task.srcrect.x =
+					static_cast<int32_t>(
+					static_cast<uint32_t>(highlighted_index)
+					* task.srcrect.w);
+				task.is_highlighted = true;
+			}
+
+			if (	task.is_highlighted &&
+				is_left_click
+			) {
+				task.type = Task::STAND;
+			}
+
+			if (task.type == Task::STAND) {
+				task.is_visible = true;
+				task.srcrect.x =
+					static_cast<int32_t>(
+					static_cast<uint32_t>(selected_index)
+					* task.srcrect.w);
+			}
+
+			for (const auto& entity : entities_product.entities) {
+				if (entity.location == task.location) {
+					// task.is_visible = false;
+					task.type = Task::NONE;
+				}
 			}
 
 			i++;
