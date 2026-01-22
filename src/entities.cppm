@@ -73,6 +73,7 @@ public:
 
 	void update(const TasksProduct& tasks_product) {
 		for (auto& entity : product.entities) {
+
 			bool has_task = false;
 			Location task_location {};
 			float target_x {};
@@ -104,29 +105,73 @@ public:
 
 			if (has_task) {
 
+				enum Direction {
+					RIGHT	= 1 << 0,
+					LEFT	= 1 << 1,
+					DOWN	= 1 << 2,
+					UP	= 1 << 3
+				};
+
+				Direction direction {RIGHT};
+
+				float x_speed = 0;
+				float y_speed = 0;
+
 				if (	entity.dstrect.x >
 					target_x + pixels_per_frame
 				) {
-					entity.dstrect.x -= pixels_per_frame;
+					// entity.dstrect.x -= pixels_per_frame;
+					x_speed -= pixels_per_frame;
+					direction = static_cast<Direction>(
+						static_cast<int>(direction) |
+						LEFT);
 				}
 					
 				if (	entity.dstrect.x <
 					target_x - pixels_per_frame
 				) {
-					entity.dstrect.x += pixels_per_frame;
+					// entity.dstrect.x += pixels_per_frame;
+					x_speed += pixels_per_frame;
+					direction = static_cast<Direction>(
+						static_cast<int>(direction) |
+						RIGHT);
 				}		
 					
 				if (	entity.dstrect.y >
 					target_y + pixels_per_frame
 				) {
-					entity.dstrect.y -= pixels_per_frame;
+					// entity.dstrect.y -= pixels_per_frame;
+					y_speed -= pixels_per_frame;
+					direction = static_cast<Direction>(
+						static_cast<int>(direction) |
+						UP);
 				}
 
 				if (	entity.dstrect.y <
 					target_y - pixels_per_frame
 				) {
-					entity.dstrect.y += pixels_per_frame;
+					// entity.dstrect.y += pixels_per_frame;
+					y_speed += pixels_per_frame;
+					direction = static_cast<Direction>(
+						static_cast<int>(direction) |
+						DOWN);
 				}
+
+				if (	(direction & UP &&
+					 direction & RIGHT) ||
+					(direction & UP &&
+					 direction & LEFT) ||
+					(direction & DOWN &&
+					 direction & RIGHT) ||
+					(direction & DOWN &&
+					 direction & LEFT)
+				) {
+					x_speed *= 0.7f;
+					y_speed *= 0.7f;
+				}
+				
+				entity.dstrect.x += x_speed;
+				entity.dstrect.y += y_speed;
 
 				if (	std::fabs(entity.dstrect.x - target_x) <
 					pixels_per_frame
